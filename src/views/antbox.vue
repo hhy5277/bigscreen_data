@@ -5,9 +5,16 @@
         :options="defaultOptions"
         @animCreated="handleAnimation"
         class="antbox"
-        :width="500"
-        :height="500"
+        :width="328"
+        :height="328"
       />
+      <div class="bigContainer">
+        <img
+          src="https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1207533529,3946480795&fm=26&gp=0.jpg"
+          alt
+        />
+        <span>刘女士</span>
+      </div>
     </div>
   </div>
 </template>
@@ -20,23 +27,45 @@ export default {
     return {
       defaultOptions: { animationData: animationData },
       animationSpeed: 1,
-      anim: {}
+      anim: {},
     };
   },
   components: {
-    Lottie
+    Lottie,
   },
   methods: {
     handleAnimation(anim) {
       this.anim = anim;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
-.container{
-    width: 100%;
-    height: 100%;
-    background: rebeccapurple;
+.container {
+  position: absolute;
+  background: rebeccapurple;
+  .antbox {
+    // position: relative;
+  }
+  .bigContainer {
+    width: 240px;
+    height: 240px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -47%, 0);
+    border-radius: 50%;
+    background: url("../assets/images/10.png") no-repeat 50% 50%;
+    background-size: contain;
+    img {
+      width: 65.2%;
+      height: 65.2%;
+      border-radius: 50%;
+      transform: translate3d(26.5%, 21%, 0);
+      position: absolute; //scale(0.6)
+      left: 0;
+      top: 0;
+    }
+  }
 }
 </style>
