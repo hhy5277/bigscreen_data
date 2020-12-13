@@ -10,35 +10,21 @@
         />
         <!-- <dv-decoration-5 style="width:300px;height:40px;" /> -->
         <div id="lottie" class="container">
-          <div class="ghost">
-            <Lottie
-              :options="defaultOptions"
-              @animCreated="handleAnimation"
-            />
+          <div class="ghost-box" @click="getDescribe">
+            <BigHead/>
           </div>
-          <div class="ghost">
-            <Lottie
-              :options="defaultOptions"
-              @animCreated="handleAnimation"
-            />
+          <div class="ghost-box">
+           <SmallHead/>
           </div>
-          <div class="ghost">
-            <Lottie
-              :options="defaultOptions"
-              @animCreated="handleAnimation"
-            />
+          <div class="ghost-box">
+          
+            <BigHead/>
           </div>
-          <div class="ghost">
-            <Lottie
-              :options="defaultOptions"
-              @animCreated="handleAnimation"
-            />
+          <div class="ghost-box">
+            <SmallHead/>
           </div>
-          <div class="ghost">
-            <Lottie
-              :options="defaultOptions"
-              @animCreated="handleAnimation"
-            />
+          <div class="ghost-box">
+            <MiddleHead/>
           </div>
         </div>
       </dv-border-box-1>
@@ -49,6 +35,9 @@
 <script>
 import * as animationData from "../assets/lottie/antcircle.json";
 import Lottie from "vue-lottie/src/lottie.vue";
+import BigHead from "../components/bigHeadPortrait";
+import MiddleHead from "../components/middleHeadPortrait";
+import SmallHead from "../components/smallHeadPortrait";
 import Vue from "vue";
 import dataV from "@jiaminghi/data-view";
 Vue.use(dataV);
@@ -61,7 +50,8 @@ export default {
     };
   },
   components: {
-    Lottie
+    Lottie,
+    BigHead,MiddleHead,SmallHead
   },
   mounted() {
     // let mapDemo = document.getElementById("lottie");
@@ -78,7 +68,14 @@ export default {
     handleAnimation(anim) {
       this.anim = anim;
       console.log(anim);
-    }
+    },
+     getDescribe() {
+//   直接调用$router.push 实现携带参数的跳转
+        this.$router.push({
+          path: `/details`,
+        })
+     }
+    
   }
   //  var animation = bodymovin.loadAnimation({
   //   container: document.getElementById("bm"),
@@ -119,26 +116,49 @@ export default {
   /* background:url('./gif.gif') no-repeat; */
   background-size: contain;
 }
-.ghost {
+.ghost-box {
   // animation: floating 10s linear 1s infinite alternate;
+  position: relative;
+  .ghost {
+    position: absolute;
+    top: 0;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
-.ghost:nth-child(1) {
+.ghost-box:nth-child(1) {
   width: 300px;
   height: 300px;
   border-radius: 50%;
   position: absolute;
-  top: 140px;
-  left: 247px;
+  top: 10%;
+  left: 10%;
+  .ghost-item {
+    width: 150px;
+    height: 150px;
+    background: url("../assets/images/avatar/avatar6.png") no-repeat;
+    background-size: cover;
+  }
+  .ghost-img {
+    width: 100%;
+    height: 100%;
+    background: url("../assets/images/avatar/avatar6.png") no-repeat;
+    background-size: cover;
+  }
 }
-.ghost:nth-child(2) {
+.ghost-box:nth-child(2) {
   width: 200px;
   height: 200px;
   border-radius: 50%;
   position: absolute;
-  bottom: 140px;
-  left: 247px;
+  top: 40%;
+  right: 5%;
 }
-.ghost:nth-child(3) {
+.ghost-box:nth-child(3) {
   width: 250px;
   height: 250px;
   border-radius: 50%;
@@ -146,20 +166,19 @@ export default {
   top: 40%;
   left: 40%;
 }
-.ghost:nth-child(even) {
+.ghost-box:nth-child(even) {
   // animation: floating 10s linear 3s infinite alternate;
 }
-.ghost:nth-child(4) {
+.ghost-box:nth-child(4) {
   width: 180px;
-  height: 1
-  80px;
+  height: 1 80px;
   border-radius: 50%;
   position: absolute;
   top: 10%;
   right: 20%;
   z-index: 22;
 }
-.ghost:nth-child(5) {
+.ghost-box:nth-child(5) {
   width: 160px;
   height: 160px;
   border-radius: 50%;
@@ -167,7 +186,7 @@ export default {
   bottom: 10%;
   right: 15%;
 }
-.ghost:nth-child(6) {
+.ghost-box:nth-child(6) {
   width: 160px;
   height: 160px;
   border-radius: 50%;
@@ -223,7 +242,7 @@ export default {
   transition: 0.3s linear;
 }
 
-.ghost:hover .eyes span {
+.ghost-box:hover .eyes span {
   height: 16px;
 }
 
@@ -236,7 +255,7 @@ export default {
   transition: 0.3s linear;
 }
 
-.ghost:hover .mouth {
+.ghost-box:hover .mouth {
   height: 12px;
 }
 
@@ -290,7 +309,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: .6;
+  opacity: 0.6;
 }
 #lottie {
   position: absolute;
