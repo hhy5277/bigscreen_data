@@ -6,10 +6,10 @@
           <div class="virtual-left">
             <div class="con">
               <div class="radmenu" @click="cons">
-                <a  class="show">爱好</a>
+                <a href="#" class="show">爱好</a>
                 <ul>
                   <li>
-                    <a href="#">旅游</a>
+                    <a href="#" class>旅游</a>
                   </li>
                   <li>
                     <a href="#">打游戏</a>
@@ -27,20 +27,19 @@
               </div>
             </div>
             <div class="center">
-              <Lottie
-                :options="defaultOptions"
-                class="antbox"
-              />
+              <Lottie :options="defaultOptions" class="antbox" />
 
               <div class="human">
                 <!-- <Lottie
                   :options="humanbodyOptions"
-                /> -->
-                <!-- <humanData/> -->
+                />-->
+                <!-- <humanData /> -->
               </div>
             </div>
           </div>
-          <div class="virtual-right"></div>
+          <div class="virtual-right">
+            <virtual-modal></virtual-modal>
+          </div>
         </div>
       </dv-border-box-1>
     </dv-full-screen-container>
@@ -48,6 +47,7 @@
 </template>
 
 <script>
+import virtualModal from "../components/virtualModal";
 import "../assets/css/spin.css";
 import animationData from "../assets/lottie/antcircle.json";
 // import humanData from "../components/animationData";
@@ -63,20 +63,26 @@ export default {
   },
   components: {
     Lottie,
-    // humanData
+    // humanData,
+    virtualModal,
   },
   mounted() {},
   methods: {
     handleAnimation(anim) {
       this.anim = anim;
     },
-    cons() {
+    cons(e) {
       var buttons = document.querySelectorAll(".radmenu a");
+      buttons[0].classList.remove("show");
+      buttons[0].classList.add("selected");
+
       for (var i = 0, l = buttons.length; i < l; i++) {
         var button = buttons[i];
         button.onclick = setSelected;
       }
       function setSelected(e) {
+        console.log(e.target);
+        e.stopPropagation();
         if (this.classList.contains("selected")) {
           this.classList.remove("selected");
           if (!this.parentNode.classList.contains("radmenu")) {
@@ -98,8 +104,8 @@ export default {
         }
         return false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
