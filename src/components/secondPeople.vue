@@ -38,7 +38,7 @@ export default {
   border-radius: 50%;
   background: url("../assets/10.png") no-repeat;
   background-size: contain;
-  animation: move 10s linear 1s infinite alternate;
+  animation: move 10s linear 2s infinite alternate;
 
   img {
     text-align: center;

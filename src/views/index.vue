@@ -17,14 +17,31 @@
            <SmallHead/>
           </div>
           <div class="ghost-box">
-          
             <BigHead/>
           </div>
           <div class="ghost-box">
             <SmallHead/>
           </div>
           <div class="ghost-box">
+           <MiddleHead/>
+          </div>
+          <div class="ghost-box">
+            <SmallHead/>
+          </div>
+          <div class="ghost-box">
+          <MiddleHead/>
+          </div>
+          <div class="ghost-box">
+            <SmallHead/>
+          </div>
+          <div class="ghost-box">
             <MiddleHead/>
+          </div>
+          <div class="ghost-box">
+            <MiddleHead/>
+          </div>
+          <div class="ghost-box">
+            <BigHead/>
           </div>
         </div>
       </dv-border-box-1>
@@ -131,68 +148,55 @@ export default {
   }
 }
 .ghost-box:nth-child(1) {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
   position: absolute;
-  top: 10%;
-  left: 10%;
-  .ghost-item {
-    width: 150px;
-    height: 150px;
-    background: url("../assets/images/avatar/avatar6.png") no-repeat;
-    background-size: cover;
-  }
-  .ghost-img {
-    width: 100%;
-    height: 100%;
-    background: url("../assets/images/avatar/avatar6.png") no-repeat;
-    background-size: cover;
-  }
+  top: 9%;
+  left: 9%;
 }
 .ghost-box:nth-child(2) {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
   position: absolute;
-  top: 40%;
-  right: 5%;
-}
-.ghost-box:nth-child(3) {
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  position: absolute;
-  top: 40%;
-  left: 40%;
-}
-.ghost-box:nth-child(even) {
-  // animation: floating 10s linear 3s infinite alternate;
-}
-.ghost-box:nth-child(4) {
-  width: 180px;
-  height: 1 80px;
-  border-radius: 50%;
-  position: absolute;
-  top: 10%;
-  right: 20%;
-  z-index: 22;
-}
-.ghost-box:nth-child(5) {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  position: absolute;
-  bottom: 10%;
+  top: 30%;
   right: 15%;
 }
-.ghost-box:nth-child(6) {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
+.ghost-box:nth-child(3) {
   position: absolute;
-  bottom: 40%;
-  right: 5%;
+  top: 30%;
+  left: 40%;
+}
+
+.ghost-box:nth-child(4) {
+  position: absolute;
+  top: 12%;
+  right: 25%;
+}
+.ghost-box:nth-child(5) {
+  position: absolute;
+  bottom: 30%;
+  right: 25%;
+}
+.ghost-box:nth-child(6) {
+  position: absolute;
+  bottom: 30%;
+  left: 15%;
+}
+.ghost-box:nth-child(7) {
+  position: absolute;
+bottom: 45%;
+  right: 15%;
+}
+.ghost-box:nth-child(8) {
+  position: absolute;
+bottom: 45%;
+  right: 45%;
+}
+.ghost-box:nth-child(9) {
+  position: absolute;
+top: 45%;
+  left: 10%;
+}
+.ghost-box:nth-child(10) {
+  position: absolute;
+top: 10%;
+  right: 45%;
 }
 
 @keyframes floating {

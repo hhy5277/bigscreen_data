@@ -6,10 +6,10 @@
           <div class="virtual-left">
             <div class="con">
               <div class="radmenu" @click="cons">
-                <a href="#" class="show">爱好</a>
+                <a  class="show">爱好</a>
                 <ul>
                   <li>
-                    <a href="#" class="">旅游</a>
+                    <a href="#">旅游</a>
                   </li>
                   <li>
                     <a href="#">打游戏</a>
@@ -36,7 +36,7 @@
                 <!-- <Lottie
                   :options="humanbodyOptions"
                 /> -->
-                <humanData/>
+                <!-- <humanData/> -->
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@
 <script>
 import "../assets/css/spin.css";
 import animationData from "../assets/lottie/antcircle.json";
-import humanData from "../components/animationData";
+// import humanData from "../components/animationData";
 import Lottie from "vue-lottie/src/lottie.vue";
 import Vue from "vue";
 import dataV from "@jiaminghi/data-view";
@@ -62,7 +62,8 @@ export default {
     };
   },
   components: {
-    Lottie,humanData
+    Lottie,
+    // humanData
   },
   mounted() {},
   methods: {

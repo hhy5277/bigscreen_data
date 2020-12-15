@@ -3,6 +3,7 @@ import Router from "vue-router";
 import index from "@/views/index";
 import antbox from "@/views/antbox";
 import details from "@/views/details";
+import mobile from "@/views/mobile";
 
 Vue.use(Router);
 
@@ -23,6 +24,11 @@ export default new Router({
       path: "/details",
       name: "details",
       component: details
-    }
+    },
+    {
+      path: "/mobile",
+      name: "mobile",
+      component: mobile
+    },
   ]
 });
