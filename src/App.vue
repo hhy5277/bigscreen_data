@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
 };
 </script>
 
@@ -17,6 +17,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
 }
-
 </style>
 <style lang="less" scoped></style>

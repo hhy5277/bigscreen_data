@@ -6,22 +6,22 @@
           <div class="virtual-left">
             <div class="con">
               <div class="radmenu" @click="cons">
-                <a href="#" class="show">爱好</a>
+                <a href="javascript:;" class="show">爱好</a>
                 <ul>
                   <li>
-                    <a href="#" class>旅游</a>
+                    <a href="javascript:;" class>旅游</a>
                   </li>
                   <li>
-                    <a href="#">打游戏</a>
+                    <a href="javascript:;">打游戏</a>
                   </li>
                   <li>
-                    <a href="#">美食</a>
+                    <a href="javascript:;">美食</a>
                   </li>
                   <li>
-                    <a href="#">电子产品</a>
+                    <a href="javascript:;">电子产品</a>
                   </li>
                   <li>
-                    <a href="#">摄影</a>
+                    <a href="javascript:;">摄影</a>
                   </li>
                 </ul>
               </div>
