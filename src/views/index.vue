@@ -41,7 +41,7 @@
             <MiddleHead/>
           </div>
           <div class="ghost-box">
-            <BigHead/>
+            <MiddleHead/>
           </div>
         </div>
       </dv-border-box-1>
@@ -197,6 +197,11 @@ top: 45%;
   position: absolute;
 top: 10%;
   right: 45%;
+}
+.ghost-box:nth-child(11) {
+  position: absolute;
+top: 30%;
+  right: 35%;
 }
 
 @keyframes floating {

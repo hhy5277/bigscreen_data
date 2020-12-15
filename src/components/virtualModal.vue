@@ -254,7 +254,7 @@ export default {
     width: 90%;
     height: 33%;
     margin: 0 auto;
-    padding: 0px 25px 0px 35px;
+    padding: 0px 35px 0px 35px;
     background: url("../assets/images/bacground.png") no-repeat 0 0;
     background-size: 100% 100%;
     overflow: hidden;
@@ -268,15 +268,14 @@ export default {
       letter-spacing: 2px;
       font-size: 16px;
       background: #080621;
-      margin-bottom: 20px;
-      margin-top: 25px;
+     margin:6% 0;
     }
     .detailBtn {
       width: 25%;
       height: 40px;
       position: absolute;
       left: 50%;
-      bottom: 20px;
+      bottom: 10%;
       transform: translateX(-48%);
       margin: 0 auto;
       background: url("../assets/images/detailBtn.png") no-repeat center center;
