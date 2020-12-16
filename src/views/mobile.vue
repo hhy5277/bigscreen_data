@@ -215,6 +215,7 @@ export default {
         "兼3职",
         "4兼职",
         "4兼2职",
+        "4兼2职1",
       ];
       let data = names.map((item) => {
         return {

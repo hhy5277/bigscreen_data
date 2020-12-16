@@ -268,7 +268,7 @@ export default {
       letter-spacing: 2px;
       font-size: 16px;
       background: #080621;
-     margin:6% 0;
+      margin: 6% 0;
     }
     .detailBtn {
       width: 25%;
@@ -345,6 +345,7 @@ export default {
       display: flex;
       .item {
         flex: 1;
+        width: 33.3%;
         margin: 0 1px;
 
         img {

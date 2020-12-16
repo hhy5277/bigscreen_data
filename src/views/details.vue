@@ -4,28 +4,15 @@
       <dv-border-box-1 class="back">
         <div class="virtual-box">
           <div class="virtual-left">
-            <div class="con">
-              <div class="radmenu" @click="cons">
-                <a href="javascript:;" class="show">爱好</a>
-                <ul>
-                  <li>
-                    <a href="javascript:;" class>旅游</a>
-                  </li>
-                  <li>
-                    <a href="javascript:;">打游戏</a>
-                  </li>
-                  <li>
-                    <a href="javascript:;">美食</a>
-                  </li>
-                  <li>
-                    <a href="javascript:;">电子产品</a>
-                  </li>
-                  <li>
-                    <a href="javascript:;">摄影</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <labelCustom :data="labelData"></labelCustom>
+            <!-- <div v-for="(item,index) in labelData" :key="index">
+              <labelCustom
+                class="labelCustom"
+                :groupId="item.groupId"
+                :labelStyle="labelStyle[index]"
+                :labelData="item"
+              ></labelCustom>
+            </div>-->
             <div class="center">
               <Lottie :options="defaultOptions" class="antbox" />
 
@@ -47,8 +34,9 @@
 </template>
 
 <script>
+import labelCustom from "../components/label-custom";
 import virtualModal from "../components/virtualModal";
-import "../assets/css/spin.css";
+// import "../assets/css/spin.css";
 import animationData from "../assets/lottie/antcircle.json";
 // import humanData from "../components/animationData";
 import Lottie from "vue-lottie/src/lottie.vue";
@@ -59,52 +47,126 @@ export default {
   data() {
     return {
       defaultOptions: { animationData: animationData },
+      labelStyle: [
+        {
+          top: "17%",
+          left: "19%",
+        },
+        {
+          top: "47%",
+          left: "13%",
+        },
+        {
+          top: "69%",
+          left: "28%",
+        },
+        {
+          top: "66%",
+          left: "56%",
+        },
+        {
+          top: "38%",
+          left: "68%",
+        },
+        {
+          top: "9%",
+          left: "52%",
+        },
+      ],
+      labelData: [
+        {
+          groupId: 1,
+          name: "爱好",
+          labelStyle: { top: "17%", left: "19%" },
+          subTag: [
+            { tagId: 1, name: "旅游" },
+            { tagId: 2, name: "打游戏" },
+            { tagId: 3, name: "美食" },
+            { tagId: 4, name: "电子产品" },
+            { tagId: 5, name: "摄影" },
+          ],
+        },
+        {
+          groupId: 2,
+          name: "学历",
+          labelStyle: { top: "47%", left: "13%" },
+          subTag: [
+            { tagId: 1, name: "本科" },
+            { tagId: 2, name: "硕士" },
+            { tagId: 3, name: "博士" },
+            { tagId: 4, name: "博士后" },
+          ],
+        },
+        {
+          groupId: 3,
+          name: "收入",
+          labelStyle: { top: "69%", left: "28%" },
+          subTag: [
+            { tagId: 1, name: "10万以下" },
+            { tagId: 2, name: "10-100万" },
+            { tagId: 3, name: "年入百万" },
+            { tagId: 4, name: "年入千万" },
+          ],
+        },
+        {
+          groupId: 4,
+          name: "有无贷款",
+          labelStyle: { top: "66%", left: "56%" },
+          subTag: [
+            { tagId: 1, name: "有贷款" },
+            { tagId: 2, name: "无贷款" },
+          ],
+        },
+        {
+          groupId: 5,
+          name: "婚姻状况",
+          labelStyle: { top: "38%", left: "68%" },
+          subTag: [
+            { tagId: 1, name: "已婚" },
+            { tagId: 2, name: "未婚" },
+          ],
+        },
+        {
+          groupId: 6,
+          name: "房车状况",
+          labelStyle: { top: "9%", left: "52%" },
+          subTag: [
+            { tagId: 1, name: "有车一族" },
+            { tagId: 2, name: "有房一族" },
+            { tagId: 3, name: "有房有车" },
+            { tagId: 4, name: "无房无车" },
+          ],
+        },
+      ],
     };
   },
   components: {
     Lottie,
     // humanData,
     virtualModal,
+    labelCustom,
   },
   mounted() {},
   methods: {
     handleAnimation(anim) {
       this.anim = anim;
     },
-    cons(e) {
-      var buttons = document.querySelectorAll(".radmenu a");
-      buttons[0].classList.remove("show");
-      buttons[0].classList.add("selected");
-
-      for (var i = 0, l = buttons.length; i < l; i++) {
-        var button = buttons[i];
-        button.onclick = setSelected;
-      }
-      function setSelected(e) {
-        console.log(e.target);
-        e.stopPropagation();
-        if (this.classList.contains("selected")) {
-          this.classList.remove("selected");
-          if (!this.parentNode.classList.contains("radmenu")) {
-            this.parentNode.parentNode.parentNode
-              .querySelector("a")
-              .classList.add("selected");
-          } else {
-            this.classList.add("show");
-          }
-        } else {
-          this.classList.add("selected");
-          if (!this.parentNode.classList.contains("radmenu")) {
-            this.parentNode.parentNode.parentNode
-              .querySelector("a")
-              .classList.remove("selected");
-          } else {
-            this.classList.remove("show");
-          }
-        }
-        return false;
-      }
-    },
+    // open(str) {
+    //   let labelCustom = document.querySelectorAll(".labelCustom");
+    //   for (let i = 0; i < labelCustom.length; i++) {
+    //     let element = labelCustom[i];
+    //     const elementId = element.attributes.groupId.nodeValue;
+    //     if (str == elementId) return;
+    //     let a = document.querySelector(".radmenu > a");
+    //     // console.log(a.classList.contains("selected"));
+    //     // console.log();
+    //     // if (a.classList.contains("selected")) {
+    //     //   console.log(1);
+    //     //   a.classList.remove("selected");
+    //     //   a.classList.add("show");
+    //     // }
+    //   }
+    // },
   },
 };
 </script>
@@ -128,12 +190,12 @@ export default {
     justify-content: center;
     align-items: center;
     position: relative;
-    .con {
-      position: absolute;
-      top: 15%;
-      left: 15%;
-      z-index: 22;
-    }
+    // .con {
+    //   position: absolute;
+    //   top: 15%;
+    //   left: 15%;
+    //   z-index: 22;
+    // }
     .center {
       width: 63%;
       height: 63%;
@@ -141,7 +203,7 @@ export default {
       .human {
         width: 70%;
         height: 80%;
-        // background: url("../assets/images/human.gif") no-repeat;
+        background: url("../assets/images/human.gif") no-repeat;
         background-size: cover;
         position: absolute;
         top: 10%;

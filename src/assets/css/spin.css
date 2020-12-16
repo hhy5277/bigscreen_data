@@ -1,157 +1,144 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-    display: block
+  display: block
 }
 
 body {
-    line-height: 1
+  line-height: 1
 }
 
 ol, ul {
-    list-style: none
+  list-style: none
 }
 
 blockquote, q {
-    quotes: none
+  quotes: none
 }
 
 blockquote:before, blockquote:after, q:before, q:after {
-    content: '';
-    content: none
+  content: '';
+  content: none
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0
+  border-collapse: collapse;
+  border-spacing: 0
 }
 
+.con {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
 
+.radmenu {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
 
+.radmenu>a {
+  top: calc(50% - 40px);
+  left: calc(50% - 40px);
+}
 
+.radmenu>a.show {
+  display: flex !important;
+}
 
+.radmenu li {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  transition: all 1s ease;
+}
 
+.radmenu a {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: rgba(31, 165, 255, .1);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 120px;
+  display: none;
+  text-decoration: none;
+  color: #4D91D3;
+  transition: all 1s ease;
+  box-shadow: 0 0 15px #1FA5FF;
+  font-size: 16px;
+}
 
+.radmenu .selected {
+  background: rgba(31, 165, 255, .4);
+  display: flex;
+  top: calc(50% - 40px);
+  left: calc(50% - 40px);
+  color: #f1f1f1;
+  box-shadow: 0 0 10px #f1f1f1;
+}
 
+.radmenu .selected+ul>li:nth-child(1) {
+  -webkit-transform: rotate(245deg) translateX(60px);
+  transform: rotate(245deg) translateX(60px);
+}
 
+.radmenu .selected+ul>li:nth-child(1)>a {
+  -webkit-transform: rotate(115deg);
+  transform: rotate(115deg) scale(.8);
+}
 
+.radmenu .selected+ul>li:nth-child(2) {
+  -webkit-transform: rotate(317deg) translateX(60px);
+  transform: rotate(317deg) translateX(60px);
+}
 
+.radmenu .selected+ul>li:nth-child(2)>a {
+  -webkit-transform: rotate(41deg);
+  transform: rotate(41deg) scale(.8);
+}
 
+.radmenu .selected+ul>li:nth-child(3) {
+  -webkit-transform: rotate(389deg) translateX(60px);
+  transform: rotate(389deg) translateX(60px);
+}
 
+.radmenu .selected+ul>li:nth-child(3)>a {
+  -webkit-transform: rotate(-31deg);
+  transform: rotate(-31deg) scale(.8);
+}
 
+.radmenu .selected+ul>li:nth-child(4) {
+  -webkit-transform: rotate(461deg) translateX(60px);
+  transform: rotate(461deg) translateX(60px);
+}
 
-.con{
-    width:200px;
-    height: 200px;
-    position: relative;
-  }
-  .radmenu {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .radmenu>a {
-    top: calc(50% - 60px);
-    left: calc(50% - 60px);
-  }
-  
-  .radmenu>a.show {
-    display: flex !important;
-  }
-  
-  .radmenu li {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    transition: all 1s ease;
-  }
-  
-  .radmenu a {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: rgba(31, 165, 255, .1);
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    border-radius: 120px;
-    display: none;
-    text-decoration: none;
-    color: #4D91D3;
-    transition: all 1s ease;
-    box-shadow: 0 0 15px #1FA5FF;
-    font-size: 16px;
-  }
-  
-  .radmenu .selected {
-    background: rgba(31, 165, 255, .4);
-    display: flex;
-    top: calc(50% - 60px);
-    left: calc(50% - 60px);
-    color: #f1f1f1;
-    box-shadow: 0 0 10px #f1f1f1;
-  }
-  
-  .radmenu .selected+ul>li:nth-child(1) {
-    -webkit-transform: rotate(72deg) translateX(100px);
-    transform: rotate(72deg) translateX(100px);
-  }
-  
-  .radmenu .selected+ul>li:nth-child(1)>a {
-    -webkit-transform: rotate(-72deg);
-    transform: rotate(-72deg);
-  }
-  
-  .radmenu .selected+ul>li:nth-child(2) {
-    -webkit-transform: rotate(144deg) translateX(100px);
-    transform: rotate(144deg) translateX(100px);
-  }
-  
-  .radmenu .selected+ul>li:nth-child(2)>a {
-    -webkit-transform: rotate(-144deg);
-    transform: rotate(-144deg);
-  }
-  
-  .radmenu .selected+ul>li:nth-child(3) {
-    -webkit-transform: rotate(216deg) translateX(100px);
-    transform: rotate(216deg) translateX(100px);
-  }
-  
-  .radmenu .selected+ul>li:nth-child(3)>a {
-    -webkit-transform: rotate(-216deg);
-    transform: rotate(-216deg);
-  }
-  
-  .radmenu .selected+ul>li:nth-child(4) {
-    -webkit-transform: rotate(288deg) translateX(100px);
-    transform: rotate(288deg) translateX(100px);
-  }
-  
-  .radmenu .selected+ul>li:nth-child(4)>a {
-    -webkit-transform: rotate(-288deg);
-    transform: rotate(-288deg);
-  }
-  
-  .radmenu .selected+ul>li:nth-child(5) {
-    -webkit-transform: rotate(360deg) translateX(100px);
-    transform: rotate(360deg) translateX(100px);
-  }
-  
-  .radmenu .selected+ul>li:nth-child(5)>a {
-    -webkit-transform: rotate(-360deg);
-    transform: rotate(-360deg);
-  }
-  
-  .radmenu .selected+ul>li>a {
-    display: flex;
-  }
+.radmenu .selected+ul>li:nth-child(4)>a {
+  -webkit-transform: rotate(-101deg);
+  transform: rotate(-101deg) scale(.8);
+}
+
+.radmenu .selected+ul>li:nth-child(5) {
+  -webkit-transform: rotate(533deg) translateX(60px);
+  transform: rotate(533deg) translateX(60px);
+}
+
+.radmenu .selected+ul>li:nth-child(5)>a {
+  -webkit-transform: rotate(-171deg);
+  transform: rotate(-171deg) scale(.8);
+}
+
+.radmenu .selected+ul>li>a {
+  display: flex;
+}

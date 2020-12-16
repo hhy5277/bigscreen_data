@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import index from "@/views/index";
 import antbox from "@/views/antbox";
-import details from "@/views/details";
+// import details from "@/views/details";
 import mobile from "@/views/mobile";
 
 Vue.use(Router);
@@ -23,7 +23,8 @@ export default new Router({
     {
       path: "/details",
       name: "details",
-      component: details
+      component: () => import(/* webpackChunkName: "details" */ '@/views/details')
+      // component: details
     },
     {
       path: "/mobile",
