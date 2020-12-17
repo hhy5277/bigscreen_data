@@ -44,7 +44,7 @@ export default {
   position: absolute;
   .container {
     position: absolute;
-    animation: move 10s linear 1s infinite alternate;
+    animation: move 10s linear 2s infinite alternate;
 
     .bigContainer {
       width: 138px;

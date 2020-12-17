@@ -11,37 +11,43 @@
         <!-- <dv-decoration-5 style="width:300px;height:40px;" /> -->
         <div id="lottie" class="container">
           <div class="ghost-box" @click="getDescribe">
-            <BigHead/>
+            <BigHead />
           </div>
           <div class="ghost-box">
-           <SmallHead/>
+            <MiddleHead />
           </div>
           <div class="ghost-box">
-            <BigHead/>
+            <BigHead />
           </div>
           <div class="ghost-box">
-            <SmallHead/>
+            <SmallHead />
           </div>
           <div class="ghost-box">
-           <MiddleHead/>
+            <MiddleHead />
           </div>
           <div class="ghost-box">
-            <SmallHead/>
+            <SmallHead />
           </div>
           <div class="ghost-box">
-          <MiddleHead/>
+            <SmallHead />
           </div>
           <div class="ghost-box">
-            <SmallHead/>
+            <SmallHead />
           </div>
           <div class="ghost-box">
-            <MiddleHead/>
+            <MiddleHead />
           </div>
           <div class="ghost-box">
-            <MiddleHead/>
+            <MiddleHead />
           </div>
           <div class="ghost-box">
-            <MiddleHead/>
+            <MiddleHead />
+          </div>
+          <div class="ghost-box">
+            <BigHead />
+          </div>
+          <div class="ghost-box">
+            <SmallHead />
           </div>
         </div>
       </dv-border-box-1>
@@ -68,7 +74,9 @@ export default {
   },
   components: {
     Lottie,
-    BigHead,MiddleHead,SmallHead
+    BigHead,
+    MiddleHead,
+    SmallHead
   },
   mounted() {
     // let mapDemo = document.getElementById("lottie");
@@ -86,13 +94,12 @@ export default {
       this.anim = anim;
       console.log(anim);
     },
-     getDescribe() {
-//   直接调用$router.push 实现携带参数的跳转
-        this.$router.push({
-          path: `/details`,
-        })
-     }
-    
+    getDescribe() {
+      //   直接调用$router.push 实现携带参数的跳转
+      this.$router.push({
+        path: `/details`
+      });
+    }
   }
   //  var animation = bodymovin.loadAnimation({
   //   container: document.getElementById("bm"),
@@ -154,19 +161,19 @@ export default {
 }
 .ghost-box:nth-child(2) {
   position: absolute;
-  top: 30%;
-  right: 15%;
+  top: 32%;
+  right: 35%;
 }
 .ghost-box:nth-child(3) {
   position: absolute;
-  top: 30%;
-  left: 40%;
+  top: 39%;
+  left: 37%;
 }
 
 .ghost-box:nth-child(4) {
   position: absolute;
-  top: 12%;
-  right: 25%;
+  top: 22%;
+  left: 25%;
 }
 .ghost-box:nth-child(5) {
   position: absolute;
@@ -180,28 +187,38 @@ export default {
 }
 .ghost-box:nth-child(7) {
   position: absolute;
-bottom: 45%;
+  bottom: 56%;
   right: 15%;
 }
 .ghost-box:nth-child(8) {
   position: absolute;
-bottom: 45%;
+  bottom: 45%;
   right: 45%;
 }
 .ghost-box:nth-child(9) {
   position: absolute;
-top: 45%;
+  top: 45%;
   left: 10%;
 }
 .ghost-box:nth-child(10) {
   position: absolute;
-top: 10%;
+  top: 10%;
   right: 45%;
 }
 .ghost-box:nth-child(11) {
   position: absolute;
-top: 30%;
-  right: 35%;
+  top: 55%;
+  right: 76%;
+}
+.ghost-box:nth-child(12) {
+  position: absolute;
+  top: 10%;
+  right: 25%;
+}
+.ghost-box:nth-child(13) {
+  position: absolute;
+  top: 10%;
+  left: 40%;
 }
 
 @keyframes floating {
