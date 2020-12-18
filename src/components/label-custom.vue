@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="con" :style="item.labelStyle" v-for="item in data" :key="item.groupId">
+    <div class="con" :style="item.labelStyle" v-for="(item,index) in data" :key="index">
       <div class="radmenu">
         <a href="javascript:;" class="show">{{item.name}}</a>
         <ul>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { getTagsList } from "../api/api";
 import "../assets/css/spin.css";
 export default {
   props: {
@@ -32,20 +33,33 @@ export default {
     data: {
       type: Array,
       default: () => {},
+      selectedTag: null,
     },
   },
-  mounted() {
+  async mounted() {
+    const res = await getTagsList();
+    console.log(res);
+    
     var buttons = document.querySelectorAll(".radmenu a");
     for (var i = 0, l = buttons.length; i < l; i++) {
+      // 为每一个a标签添加点击事件
       var button = buttons[i];
       button.onclick = setSelected;
     }
     function setSelected(e) {
-      let arr = e.target.parentNode.parentNode.parentNode.children;
+      let arr = e.target.parentNode.parentNode.parentNode.children; //arr是最大的容器con
       for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
+        // 所有的标签集
         let selecteds = element.querySelector(".radmenu > a");
         if (selecteds && selecteds.classList.contains("selected")) {
+          if (e.target.classList.contains("selected")) {
+            // 控制关闭tag标签
+            e.target.classList.remove("selected");
+            e.target.classList.add("show");
+            return false;
+          }
+          // 关闭所有的标签集
           selecteds.classList.remove("selected");
           selecteds.classList.add("show");
         }
