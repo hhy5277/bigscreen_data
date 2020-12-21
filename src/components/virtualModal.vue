@@ -75,18 +75,18 @@ export default {
         {
           id: 1,
           name: "中国银行信用卡",
-          img: require("../assets/images/firstone.png"),
+          img: require("../assets/images/801.jpg"),
         },
-        {
-          id: 2,
-          name: "中国银行HUAWEI联名",
-          img: require("../assets/images/secondone.png"),
-        },
-        {
-          id: 3,
-          name: "AMERICAN信用卡",
-          img: require("../assets/images/lastone.png"),
-        },
+        // {
+        //   id: 2,
+        //   name: "中国银行HUAWEI联名",
+        //   img: require("../assets/images/secondone.png"),
+        // },
+        // {
+        //   id: 3,
+        //   name: "AMERICAN信用卡",
+        //   img: require("../assets/images/lastone.png"),
+        // },
       ],
       cartForm: [
         {

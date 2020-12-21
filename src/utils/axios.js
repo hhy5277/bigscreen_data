@@ -40,6 +40,7 @@ class HttpRequest {
             }
             return data
         }, error => {
+            console.log(error,111)
             this.destory(url)
             let errorInfo = error.response
             if (!errorInfo) {

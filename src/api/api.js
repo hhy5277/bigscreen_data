@@ -6,6 +6,14 @@ export const getTagsList = (params) => {
         params
     })
 }
+// 查询客户信息
+export const screencustInfo = (params) => {
+    return axios.request({
+        url: 'screen/custInfo',
+        method: 'get',
+        params
+    })
+}
 export const aaa = (data) => {
     return axios.request({
         url: '',

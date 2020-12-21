@@ -2,13 +2,16 @@
   <div>
     <dv-full-screen-container>
       <dv-border-box-1 class="back">
+        <!-- <video id="v" autoplay="autoplay" loop>
+          <source src="../assets/images/789.mp4" type="video/mp4" />
+        </video> -->
         <div class="virtual-box">
           <div class="virtual-left">
             <div class="return-box">
               <div class="return" @click="returnindex">返回首页</div>
               <div class="return" @click="qrcode">
                 预览报告
-                <div v-show="num==1" class="qrcode" ></div>
+                <div v-show="num == 1" class="qrcode"></div>
               </div>
             </div>
             <labelCustom :data="labelData"></labelCustom>
@@ -54,7 +57,7 @@ export default {
   data() {
     return {
       defaultOptions: { animationData: animationData },
-       num: 0,
+      num: 0,
       labelStyle: [
         {
           top: "17%",
@@ -165,8 +168,8 @@ export default {
         path: `/`
       });
     },
-    qrcode(){
-      this.num=!this.num
+    qrcode() {
+      this.num = !this.num;
     }
     // open(str) {
     //   let labelCustom = document.querySelectorAll(".labelCustom");
@@ -189,6 +192,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#v{
+  width: 100%;
+  height: 100%;
+}
 .back {
   margin: 0;
   padding: 0;
@@ -220,7 +227,7 @@ export default {
       .human {
         width: 70%;
         height: 80%;
-        background: url("../assets/images/human.gif") no-repeat;
+        // background: url("../assets/images/human.gif") no-repeat;
         background-size: cover;
         position: absolute;
         top: 10%;
@@ -244,13 +251,13 @@ export default {
         color: #1e9bdb;
         background: rgba(31, 165, 255, 0.1);
         position: relative;
-        .qrcode{
+        .qrcode {
           position: absolute;
           bottom: 80px;
           left: 0px;
           width: 200px;
           height: 200px;
-          background:url("../assets/images/QRcode.png") no-repeat;
+          background: url("../assets/images/QRcode.png") no-repeat;
           background-size: cover;
         }
       }
