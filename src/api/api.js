@@ -6,9 +6,16 @@ export const getTagsList = (params) => {
         params
     })
 }
-export const aaa = (data) => {
+export const getCustomInfo = (params) => {
     return axios.request({
-        url: '',
+        url: 'screen/custInfo',
+        method: 'get',
+        params
+    })
+}
+export const addCustomTag = (data) => {
+    return axios.request({
+        url: 'screen/custTag',
         method: 'post',
         data
     })

@@ -3,48 +3,147 @@
     <!-- /////////////////// -->
     <div
       :class="{card:true,creditCard:true,hidden:currentCard && currentCard !== 1,show:currentCard == 1}  "
+      v-if="cartForm"
     >
       <div class="bigTitle">信用卡</div>
       <div class="cardContainer">
-        <div class="item" v-for="item in card" :key="item.id">
-          <img :src="item.img" alt />
-          <span>{{item.name}}</span>
+        <div class="item">
+          <img :src="cartForm.cardImage" alt />
+          <span>{{cartForm.cardName}}</span>
         </div>
       </div>
       <div v-show="currentCard == 1" class="hiddenContant">
         <p>悠然白金卡是专为中青年城市白领客户设计的IC信用卡产品，提供全国网点优先通道、信用卡盗失保险等超值服务，支持刷卡、插卡和挥卡支</p>
         <div class="virtualForm">
-          <div class="formItem" v-for="(item,index) in cartForm" :key="index">
-            <span class="label">{{item.label}}</span>
-            <span class="content">{{item.value}}</span>
+          <div class="formItem">
+            <span class="label">账单日:</span>
+            <span class="content">{{cartForm.billDate}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">还款日:</span>
+            <span class="content">{{cartForm.payDate}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">免息期:</span>
+            <span class="content">{{cartForm.annualFee}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">币种:</span>
+            <span class="content">{{cartForm.currency}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">年费:</span>
+            <span class="content">{{cartForm.interestFree}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">积分方式:</span>
+            <span class="content">{{cartForm.integralMethod}}</span>
           </div>
         </div>
-        <div class="back" @click="currentCard = null">＜返回</div>
+        <div class="back" @click="currentCard = null">
+          <img src="../assets/images/leftJT.png" alt />
+          <span>返回</span>
+          <img src="../assets/images/leftJT.png" alt />
+        </div>
       </div>
-      <div v-show="currentCard !== 1" class="detailBtn" @click="detail(1)"></div>
+      <div v-show="currentCard !== 1" class="detailBtn" @click="detail(1)">
+        <img src="../assets/images/leftJT.png" alt />
+        <span>点击查看详情</span>
+        <img src="../assets/images/leftJT.png" alt />
+      </div>
     </div>
     <!-- ////////////////////// -->
     <div
       :class="{card:true,'conduct-financial-transactions':true,hidden:currentCard && currentCard !== 2,show:currentCard == 2}"
+      v-if="conductForm"
     >
       <div class="bigTitle">理财</div>
-      <div class="num">2.35%-2.23%</div>
+      <div class="num">{{conductForm.financialRate}}</div>
       <div class="contant">预期年化收益</div>
-      <div class="contant">惠利峰结构性存款2020年2289期</div>
+      <div class="contant" v-show="currentCard !== 2">{{conductForm.financialName}}</div>
       <div v-show="currentCard == 2" class="hiddenContant">
         <div class="virtualForm">
-          <div class="formItem" v-for="(item,index) in conductForm" :key="index">
-            <span class="label">{{item.label}}</span>
-            <span class="content">{{item.value}}</span>
+          <div class="formItem">
+            <span class="label">产品系列:</span>
+            <span class="content">{{ conductForm.financialName }}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">币种:</span>
+            <span class="content">{{conductForm.currency }}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">起始日期:</span>
+            <span class="content">{{conductForm.collectDate}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">结束日期:</span>
+            <span class="content">{{conductForm.endDate}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">起息日:</span>
+            <span class="content">{{conductForm.startDate}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">到期日:</span>
+            <span class="content">{{conductForm.expireDate}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">投资期限:</span>
+            <span class="content">{{conductForm.financialLimit}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">业绩基准:</span>
+            <span class="content">{{conductForm.financialRate}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">产品开封闭类型:</span>
+            <span class="content">{{conductForm.financialClosedType}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">销售状态:</span>
+            <span class="content">{{conductForm.status}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">风险等级:</span>
+            <span class="content">{{conductForm.riskRating}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">收益类型:</span>
+            <span class="content">{{conductForm.financialType}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">发行区域:</span>
+            <span class="content">{{conductForm.lssuerArea}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">起购金额:</span>
+            <span class="content">{{conductForm.financialAmount}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">发行机构:</span>
+            <span class="content">{{conductForm.issuer}}</span>
+          </div>
+          <div class="formItem">
+            <span class="label">产品说明书:</span>
+            <span class="content">{{conductForm.financialContent}}</span>
           </div>
         </div>
-        <div class="back" @click="currentCard = null">＜返回</div>
+        <div class="back" @click="currentCard = null">
+          <img src="../assets/images/leftJT.png" alt />
+          <span>返回</span>
+          <img src="../assets/images/leftJT.png" alt />
+        </div>
       </div>
-      <div v-show="currentCard !== 2" class="detailBtn" @click="detail(2)"></div>
+      <div v-show="currentCard !== 2" class="detailBtn" @click="detail(2)">
+        <img src="../assets/images/leftJT.png" alt />
+        <span>点击查看详情</span>
+        <img src="../assets/images/leftJT.png" alt />
+      </div>
     </div>
     <!-- ///////////////////////// -->
     <div
       :class="{card:true,loan:true,hidden:currentCard && currentCard !== 3,show:currentCard == 3} "
+      v-if="loanData"
     >
       <div class="bigTitle">贷款</div>
       <div v-show="currentCard !== 3">
@@ -56,174 +155,38 @@
         <div class="loanContainer">
           <div class="loanItem" v-for="(item,index) in loanData" :key="index">
             <div class="title">{{item.title}}</div>
-            <div class="listItem" v-for="(child,i) in item.list" :key="i">{{child}}</div>
+            <div class="listItem">{{item.content}}</div>
           </div>
         </div>
-        <div class="back" @click="currentCard = null">＜返回</div>
+        <div class="back" @click="currentCard = null">
+          <img src="../assets/images/leftJT.png" alt />
+          <span>返回</span>
+          <img src="../assets/images/leftJT.png" alt />
+        </div>
       </div>
-      <div v-show="currentCard !== 3" class="detailBtn" @click="detail(3)"></div>
+      <div v-show="currentCard !== 3" class="detailBtn" @click="detail(3)">
+        <img src="../assets/images/leftJT.png" alt />
+        <span>点击查看详情</span>
+        <img src="../assets/images/leftJT.png" alt />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    recommended: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {
       currentCard: null, //某一项card
-      card: [
-        {
-          id: 1,
-          name: "中国银行信用卡",
-          img: require("../assets/images/firstone.png"),
-        },
-        {
-          id: 2,
-          name: "中国银行HUAWEI联名",
-          img: require("../assets/images/secondone.png"),
-        },
-        {
-          id: 3,
-          name: "AMERICAN信用卡",
-          img: require("../assets/images/lastone.png"),
-        },
-      ],
-      cartForm: [
-        {
-          label: "账单日:",
-          value: "每月20日",
-        },
-        {
-          label: "还款日:",
-          value: "一般8日或9日",
-        },
-        {
-          label: "免息期:",
-          value: "最长50天",
-        },
-        {
-          label: "币种:",
-          value: "人命币",
-        },
-        {
-          label: "年费:",
-          value:
-            "银联金卡160元/年，附卡80元/年首年免年费，消费5次免次年年费; Visa金卡有效期内免年费。",
-        },
-        {
-          label: "积分方式:",
-          value:
-            "银联金卡160元/年，附卡80元/年首年免年费，消费5次免次年年费; Visa金卡有效期内免年费。",
-        },
-      ],
-      conductForm: [
-        {
-          label: "产品系列:",
-          value: "安心得利一安心得利",
-        },
-        {
-          label: "币种:",
-          value: "人民币",
-        },
-        {
-          label: "起始日期:",
-          value: "2020/12/11",
-        },
-        {
-          label: "结束日期:",
-          value: "2020/12/11",
-        },
-        {
-          label: "起息日:",
-          value: "2020/12/04",
-        },
-        {
-          label: "到期日:",
-          value: "2021/06/22",
-        },
-        {
-          label: "投资期限:",
-          value: "200天",
-        },
-        {
-          label: "业绩基准:",
-          value: "3.28 % ",
-        },
-        {
-          label: "产品开封闭类型:",
-          value: "封闭",
-        },
-        {
-          label: "销售状态:",
-          value: "封闭",
-        },
-        {
-          label: "风险等级:",
-          value: "中低",
-        },
-        {
-          label: "收益类型:",
-          value: "业绩基准",
-        },
-        {
-          label: "发行区域:",
-          value: "全国发行",
-        },
-        {
-          label: "起购金额:",
-          value: "1000",
-        },
-        {
-          label: "发行机构:",
-          value: "中国农业银行",
-        },
-        {
-          label: "产品说明书:",
-          value: "请阅读产品说明书",
-        },
-      ],
-      loanData: [
-        {
-          title: "借款人具备什么条件",
-          list: [
-            "1、具有完全民事行为能力和合法有效的身份证件",
-            "2、具有偿还贷款本息的能力",
-            "3、信用状况良好",
-            "4、已签订合法有效的房屋买卖合同,且所购房屋用途为住宅",
-            "5、有不低于最低规定比例的首付款证明",
-            "6、则上以所购住房设定抵押担保",
-            "7、农业银行规定的其他条件",
-          ],
-        },
-        {
-          title: "贷款期限利和颇度是多少?",
-          list: [
-            "1、贷款期限最长不超过30年",
-            "2、贷款利率按照中国人民银行等有关规定执行",
-            "3、贷款最高额度不超过所购住房成交价格的80%，具体按照当地差别化住房信贷政策有关规定执行",
-          ],
-        },
-        {
-          title: "借款人具备什么条件?",
-          list: [
-            "1、具有完全民事行为能力和合法有效的身份证件",
-            "2、具有偿还贷款本息的能力",
-            "3、信用状况良好",
-            "4、已签订合法有效的房屋买卖合同,且所购房屋用途为住宅",
-            "5、有不低于最低规定比例的首付款证明",
-            "6、则上以所购住房设定抵押担保",
-            "7、农业银行规定的其他条件",
-          ],
-        },
-        {
-          title: "贷款期限利和颇度是多少?",
-          list: [
-            "1、贷款期限最长不超过30年",
-            "2、贷款利率按照中国人民银行等有关规定执行",
-            "3、贷款最高额度不超过所购住房成交价格的80%，具体按照当地差别化住房信贷政策有关规定执行",
-          ],
-        },
-      ],
+      cartForm: [],
+      conductForm: [],
+      loanData: [],
     };
   },
   methods: {
@@ -233,6 +196,16 @@ export default {
       for (let item = 0; item < cards.length; item++) {
         const element = cards[item];
         if (item == index) return false;
+      }
+    },
+  },
+  watch: {
+    recommended(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        console.log(newVal);
+        this.cartForm = newVal.card;
+        this.conductForm = newVal.financial;
+        this.loanData = newVal.loan;
       }
     },
   },
@@ -271,19 +244,29 @@ export default {
       margin: 6% 0;
     }
     .detailBtn {
-      width: 25%;
-      height: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       position: absolute;
       left: 50%;
-      bottom: 10%;
-      transform: translateX(-48%);
-      margin: 0 auto;
-      background: url("../assets/images/detailBtn.png") no-repeat center center;
-      background-size: contain;
+      bottom: 28px;
+      transform: translateX(-50%);
+      cursor: pointer;
+      font-size: 20px;
+      span {
+        flex: 1;
+      }
+      img {
+        width: 23px;
+        height: 25px;
+      }
+      img:nth-child(3) {
+        transform: rotate(180deg);
+      }
     }
   }
   .hiddenContant {
-    height: 70%;
+    height: 67%;
     position: relative;
     p,
     .formItem,
@@ -328,10 +311,26 @@ export default {
       }
     }
     .back {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       position: absolute;
-      left: 0;
+      left: 50%;
       bottom: 0;
+      transform: translateX(-50%);
       cursor: pointer;
+      font-size: 24px;
+      font-size: 20px;
+      span {
+        flex: 1;
+      }
+      img {
+        width: 23px;
+        height: 25px;
+      }
+      img:nth-child(3) {
+        transform: rotate(180deg);
+      }
     }
   }
   .loan .hiddenContant {
@@ -341,7 +340,7 @@ export default {
   .creditCard {
     color: #fff;
     .cardContainer {
-      margin: 20px 0 30px;
+      margin: 20px 0 20px;
       display: flex;
       .item {
         flex: 1;
@@ -350,7 +349,7 @@ export default {
 
         img {
           width: 100%;
-          max-width: 200px;
+          max-width: 180px;
         }
         span {
           display: inline-block;
