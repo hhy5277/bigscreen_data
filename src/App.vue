@@ -18,4 +18,13 @@ export default {
   height: 100%;
 }
 </style>
-<style lang="less" scoped></style>
+<script>
+export default {
+  mounted(){
+var dom = document.getElementById ('app');
+dom.oncontextmenu = function (){
+     return false;
+}
+  }
+}
+</script>

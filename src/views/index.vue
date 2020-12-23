@@ -2,6 +2,7 @@
   <div>
     <dv-full-screen-container>
       <dv-border-box-1 class="back">
+        <button>Click</button>
         <!-- <dv-loading>Loading...</dv-loading> -->
         <Lottie
           :options="defaultOptions"
@@ -10,44 +11,28 @@
         />
         <!-- <dv-decoration-5 style="width:300px;height:40px;" /> -->
         <div id="lottie" class="container">
-          <div class="ghost-box" @click="getDescribe">
-            <BigHead />
+          <div
+            class="ghost-box"
+            v-for="(item, index) in information.slice(0, 3)"
+            :key="index"
+            @click="getDescribe"
+          >
+            <BigHead v-bind:information="item" />
           </div>
-          <div class="ghost-box">
-            <MiddleHead />
+          <div
+            class="ghost-box"
+            v-for="(item, index) in information.slice(3, 9)"
+            :key="index"
+          >
+            <SmallHead v-bind:information="item" />
           </div>
-          <div class="ghost-box">
-            <BigHead />
-          </div>
-          <div class="ghost-box">
-            <SmallHead />
-          </div>
-          <div class="ghost-box">
-            <MiddleHead />
-          </div>
-          <div class="ghost-box">
-            <SmallHead />
-          </div>
-          <div class="ghost-box">
-            <SmallHead />
-          </div>
-          <div class="ghost-box">
-            <SmallHead />
-          </div>
-          <div class="ghost-box">
-            <MiddleHead />
-          </div>
-          <div class="ghost-box">
-            <MiddleHead />
-          </div>
-          <div class="ghost-box">
-            <MiddleHead />
-          </div>
-          <div class="ghost-box">
-            <BigHead />
-          </div>
-          <div class="ghost-box">
-            <SmallHead />
+
+          <div
+            class="ghost-box"
+            v-for="(item, index) in information.slice(9, 14)"
+            :key="index"
+          >
+            <MiddleHead v-bind:information="item" />
           </div>
         </div>
       </dv-border-box-1>
@@ -56,6 +41,8 @@
 </template>
 
 <script>
+import SockJS from "sockjs-client";
+import Stomp from "@stomp/stompjs";
 import * as animationData from "../assets/lottie/antcircle.json";
 import Lottie from "vue-lottie/src/lottie.vue";
 import BigHead from "../components/bigHeadPortrait";
@@ -63,13 +50,15 @@ import MiddleHead from "../components/middleHeadPortrait";
 import SmallHead from "../components/smallHeadPortrait";
 import Vue from "vue";
 import dataV from "@jiaminghi/data-view";
+import { mapMutations, mapState } from "vuex";
 Vue.use(dataV);
 export default {
   data() {
     return {
       defaultOptions: { animationData: animationData },
       animationSpeed: 1,
-      anim: {}
+      anim: {},
+      information: []
     };
   },
   components: {
@@ -78,19 +67,16 @@ export default {
     MiddleHead,
     SmallHead
   },
+  computed: {
+    ...mapState(["constomData"])
+  },
   mounted() {
-    console.log(2222);
-    // let mapDemo = document.getElementById("lottie");
-    // lottie.loadAnimation({
-    //   //LottieJS动画技术
-    //   container: mapDemo,
-    //   renderer: "svg", //渲染出来的格式
-    //   loop: true, //循环播放
-    //   autoplay: true, //自动播放
-    //   path: "../utils/data.json" //路径地址，<!--第一步先引用lottieJS在主页面：indexView.vue中-->
-    // });
+    this.init();
+    console.log();
+    this.information = this.constomData;
   },
   methods: {
+    ...mapMutations(["handleConstomData"]),
     handleAnimation(anim) {
       this.anim = anim;
       console.log(anim);
@@ -100,6 +86,47 @@ export default {
       this.$router.push({
         path: `/details`
       });
+    },
+    init() {
+      let that = this;
+      var socket;
+      if (typeof WebSocket == "undefined") {
+        console.log("您的浏览器不支持WebSocket");
+      } else {
+        console.log("您的浏览器支持WebSocket");
+        //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
+        //等同于
+        var websocket = new WebSocket(
+          "ws://192.168.0.85:8282/kangxu-hkface/websocket/1"
+        );
+        //socket = new WebSocket("${basePath}websocket/${cid}".replace("http","ws"));
+        //打开事件
+        websocket.onopen = function() {
+          console.log("Socket 已打开");
+          //socket.send("这是来自客户端的消息" + location.href + new Date());
+        };
+        //获得消息事件
+        websocket.onmessage = function(msg) {
+          if (msg.data !== "连接成功") {
+            var data = JSON.parse(msg.data);
+            let arr = that.information;
+            arr.push(data);
+            console.log(arr);
+            // that.information = arr;
+            that.handleConstomData(arr);
+          }
+          //发现消息进入    开始处理前端触发逻辑
+        };
+        //关闭事件
+        websocket.onclose = function() {
+          console.log("Socket已关闭");
+        };
+        //发生了错误事件
+        websocket.onerror = function() {
+          alert("Socket发生了错误");
+          //此时可以尝试刷新页面
+        };
+      }
     }
   }
   //  var animation = bodymovin.loadAnimation({
@@ -157,18 +184,18 @@ export default {
 }
 .ghost-box:nth-child(1) {
   position: absolute;
-  top: 9%;
-  left: 9%;
+  top: 8%;
+  left: 6%;
 }
-.ghost-box:nth-child(2) {
+.ghost-box:nth-child(12) {
   position: absolute;
-  top: 32%;
+  top: 37%;
   right: 35%;
 }
 .ghost-box:nth-child(3) {
   position: absolute;
-  top: 39%;
-  left: 37%;
+  top: 36%;
+  left: 39%;
 }
 
 .ghost-box:nth-child(4) {
@@ -176,7 +203,7 @@ export default {
   top: 22%;
   left: 25%;
 }
-.ghost-box:nth-child(5) {
+.ghost-box:nth-child(13) {
   position: absolute;
   bottom: 30%;
   right: 25%;
@@ -193,8 +220,8 @@ export default {
 }
 .ghost-box:nth-child(8) {
   position: absolute;
-  bottom: 45%;
-  right: 45%;
+  bottom: 37%;
+  right: 41%;
 }
 .ghost-box:nth-child(9) {
   position: absolute;
@@ -211,15 +238,20 @@ export default {
   top: 55%;
   right: 76%;
 }
-.ghost-box:nth-child(12) {
+.ghost-box:nth-child(2) {
   position: absolute;
   top: 10%;
   right: 25%;
 }
-.ghost-box:nth-child(13) {
+.ghost-box:nth-child(5) {
   position: absolute;
   top: 10%;
   left: 40%;
+}
+.ghost-box:nth-child(14) {
+  position: absolute;
+  bottom: 23%;
+  left: 43%;
 }
 
 @keyframes floating {
@@ -342,5 +374,82 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+button {
+  display: inline-block;
+  padding: 1em 2em;
+  background-color: #ff0081;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 2px 25px rgba(233, 30, 99, 0.5);
+  outline: 0;
+  transition: transform ease-in 0.1s, background-color ease-in 0.1s,
+    box-shadow ease-in 0.25s;
+}
+button::before {
+  position: absolute;
+  content: "";
+  left: -2em;
+  right: -2em;
+  top: -2em;
+  bottom: -2em;
+  pointer-events: none;
+  transition: ease-in-out 0.5s;
+  background-repeat: no-repeat;
+  background-image: radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+    10% 10%, 18% 18%, 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%,
+    20% 20%;
+  background-position: 18% 40%, 20% 31%, 30% 30%, 40% 30%, 50% 30%, 57% 30%,
+    65% 30%, 80% 32%, 15% 60%, 83% 60%, 18% 70%, 25% 70%, 41% 70%, 50% 70%,
+    64% 70%, 80% 71%;
+  animation: bubbles ease-in-out 0.75s forwards;
+}
+
+button:active {
+  transform: scale(0.95);
+  background-color: #f3037c;
+  box-shadow: 0 2px 25px rgba(233, 30, 99, 0.5);
+}
+button:active::before {
+  animation: none;
+  background-size: 0;
+}
+@keyframes bubbles {
+  0% {
+    background-position: 18% 40%, 20% 31%, 30% 30%, 40% 30%, 50% 30%, 57% 30%,
+      65% 30%, 80% 32%, 15% 60%, 83% 60%, 18% 70%, 25% 70%, 41% 70%, 50% 70%,
+      64% 70%, 80% 71%;
+  }
+  50% {
+    background-position: 10% 44%, 0 20%, 15% 5%, 30% 0%, 42% 0%, 62% -2%, 75% 0%,
+      95% -2%, 0% 80%, 95% 55%, 7% 100%, 24% 100%, 41% 100%, 55% 95%, 68% 96%,
+      95% 100%;
+  }
+  100% {
+    background-position: 5% 44%, -5% 20%, 7% 5%, 23% 0%, 37% 0, 58% -2%, 80% 0%,
+      100% -2%, -5% 80%, 100% 55%, 2% 100%, 23% 100%, 42% 100%, 60% 95%, 70% 96%,
+      100% 100%;
+    background-size: 0 0;
+  }
 }
 </style>
