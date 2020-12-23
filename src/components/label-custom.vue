@@ -50,6 +50,8 @@ export default {
         { top: "11%", left: "57%" },
         { top: "75%", left: "40%" },
         { top: "7%", left: "40%" },
+        { top: "5%", left: "6%" },
+        { top: "5%", left: "76%" },
       ],
       tagsList: [],
     };

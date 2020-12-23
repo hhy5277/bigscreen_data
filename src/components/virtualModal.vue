@@ -13,7 +13,7 @@
         </div>
       </div>
       <div v-show="currentCard == 1" class="hiddenContant">
-        <p>悠然白金卡是专为中青年城市白领客户设计的IC信用卡产品，提供全国网点优先通道、信用卡盗失保险等超值服务，支持刷卡、插卡和挥卡支</p>
+        <p>{{cartForm.content}}</p>
         <div class="virtualForm">
           <div class="formItem">
             <span class="label">账单日:</span>
@@ -147,13 +147,14 @@
     >
       <div class="bigTitle">贷款</div>
       <div v-show="currentCard !== 3">
-        <div class="contant">贷款金额:最高300万</div>
-        <div class="contant">贷款年限:1-5年</div>
-        <div class="contant">贷款利息:5%</div>
+        <!-- <div class="contant">贷款金额:最高300万</div>
+        <div class="contant">贷款年限:{{loanData.loanTerm}}</div>
+        <div class="contant">贷款利息:5%</div> -->
+        <div class="contant">{{loanData.loanName}}</div>
       </div>
       <div v-show="currentCard == 3" class="hiddenContant">
         <div class="loanContainer">
-          <div class="loanItem" v-for="(item,index) in loanData" :key="index">
+          <div class="loanItem" v-for="(item,index) in loanData.detail" :key="index">
             <div class="title">{{item.title}}</div>
             <div class="listItem">{{item.content}}</div>
           </div>
@@ -278,6 +279,10 @@ export default {
       line-height: 30px;
       letter-spacing: 2px;
     }
+    p {
+      max-height: 200px;
+      overflow-y: scroll;
+    }
     .virtualForm {
       margin-top: 30px;
     }
@@ -291,7 +296,8 @@ export default {
         flex: 1;
       }
     }
-    .loanContainer::-webkit-scrollbar {
+    .loanContainer::-webkit-scrollbar,
+    p::-webkit-scrollbar {
       display: none;
     }
     .loanContainer {

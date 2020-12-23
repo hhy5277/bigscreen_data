@@ -79,6 +79,7 @@ export default {
     SmallHead
   },
   mounted() {
+    console.log(2222);
     // let mapDemo = document.getElementById("lottie");
     // lottie.loadAnimation({
     //   //LottieJS动画技术
