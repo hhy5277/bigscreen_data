@@ -8,12 +8,14 @@
         :width="187"
         :height="187"
       />
-      <div class="bigContainer">
+       <div class="bigContainer">
+        <div class="bigContainer-img">
         <img
-          src="../assets/images/avatar/avatar.png"
+           :src="information.url"
           alt
         />
-        <span>刘女士</span>
+        </div>
+         <span>{{information.name}}</span>
       </div>
     </div>
   </div>
@@ -22,21 +24,24 @@
 import * as animationData from "../assets/lottie/antcircle.json";
 import Lottie from "vue-lottie/src/lottie.vue";
 export default {
+    props: {
+    information:Object
+  },
   data() {
     return {
       defaultOptions: { animationData: animationData },
       animationSpeed: 1,
-      anim: {},
+      anim: {}
     };
   },
   components: {
-    Lottie,
+    Lottie
   },
   methods: {
     handleAnimation(anim) {
       this.anim = anim;
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
@@ -56,15 +61,19 @@ export default {
       border-radius: 50%;
       background: url("../assets/images/10.png") no-repeat 50% 50%;
       background-size: contain;
-      img {
+     .bigContainer-img {
         width: 65.2%;
         height: 65.2%;
         border-radius: 50%;
-        transform: translate3d(27%, 21%, 0);
+        transform: translate3d(27%,21%,0);
         position: absolute; //scale(0.6)
-        left: 0;
         top: 0;
-      }
+        left: 0;
+        overflow: hidden;
+        img{
+          width: 100%;
+        }
+     }
       span {
         position: absolute;
         bottom: 0;

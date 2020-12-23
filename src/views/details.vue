@@ -5,6 +5,7 @@
         <!-- <video id="v" autoplay="autoplay" loop>
           <source src="../assets/images/789.mp4" type="video/mp4" />
         </video> -->
+        <dv-loading class="loading" v-if="loading">加载中...</dv-loading>
         <div class="virtual-box">
           <div class="virtual-left">
             <div class="return-box">
@@ -17,7 +18,6 @@
             <labelCustom ref="labelCustom" @addCustomTag="addCustomTag"></labelCustom>
             <div class="center">
               <Lottie :options="defaultOptions" class="antbox" />
-
               <div class="human">
                 <!-- <Lottie
                   :options="humanbodyOptions"
@@ -54,6 +54,7 @@ export default {
       defaultOptions: { animationData: animationData },
       num: 0,
       recommended: {}, //推荐产品
+      loading:true
     };
   },
   components: {
@@ -66,6 +67,9 @@ export default {
     // this.getTagList();
   },
   mounted() {
+    setTimeout(() => {
+      this.loading=false
+    }, 3000);
     this.getCustomInfo();
   },
   methods: {
@@ -138,6 +142,9 @@ export default {
   background-size: cover;
   animation: bganimation 15s infinite;
   position: relative;
+  .loading{
+    color:#FFF
+  }
 }
 .virtual-box {
   width: 100%;

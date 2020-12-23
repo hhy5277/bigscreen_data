@@ -6,7 +6,7 @@ import router from './router'
 // 引入css
 import "./assets/css/reset.css";
 
-
+import searchStore from './store/SearchStore' 
 
 Vue.config.productionTip = false
 
@@ -14,6 +14,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store:searchStore, 
   components: { App },
   template: '<App/>'
 })

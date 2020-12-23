@@ -249,7 +249,7 @@ export default {
       align-items: center;
       position: absolute;
       left: 50%;
-      bottom: 28px;
+      bottom: 37px;
       transform: translateX(-50%);
       cursor: pointer;
       font-size: 20px;
@@ -349,7 +349,7 @@ export default {
 
         img {
           width: 100%;
-          max-width: 180px;
+          max-width: 280px;
         }
         span {
           display: inline-block;
