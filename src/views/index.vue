@@ -15,7 +15,7 @@
             class="ghost-box"
             v-for="(item, index) in information.slice(0, 3)"
             :key="index"
-            @click="getDescribe"
+            @click="getDescribe(item.pid)"
           >
             <BigHead v-bind:information="item" />
           </div>
@@ -81,10 +81,13 @@ export default {
       this.anim = anim;
       console.log(anim);
     },
-    getDescribe() {
+    getDescribe(id) {
       //   直接调用$router.push 实现携带参数的跳转
       this.$router.push({
-        path: `/details`
+        path: `/details`,
+        params:{
+         id
+        }
       });
     },
     init() {
