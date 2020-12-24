@@ -4,7 +4,7 @@
       <dv-border-box-1 class="back">
         <!-- <video id="v" autoplay="autoplay" loop>
           <source src="../assets/images/789.mp4" type="video/mp4" />
-        </video> -->
+        </video>-->
         <dv-loading class="loading" v-if="loading">加载中...</dv-loading>
         <div class="virtual-box">
           <div class="virtual-left">
@@ -12,10 +12,18 @@
               <div class="return" @click="returnindex">返回首页</div>
               <div class="return" @click="qrcode">
                 预览报告
-                <div v-show="num==1" class="qrcode"></div>
+                <div
+                v-show="this.num==1"
+                  class="qrcode"
+                  v-bind:style="{ 'background-image':'url('+qrCodeUrl+')', backgroundSize: 'cover' }"
+                ></div>
               </div>
             </div>
-            <labelCustom ref="labelCustom" @addCustomTag="addCustomTag"></labelCustom>
+            <labelCustom
+              ref="labelCustom"
+              :customId="customId"
+              @addCustomTag="addCustomTag"
+            ></labelCustom>
             <div class="center">
               <Lottie :options="defaultOptions" class="antbox" />
               <div class="human">
@@ -27,7 +35,10 @@
             </div>
           </div>
           <div class="virtual-right">
-            <virtual-modal ref="virtualModal" :recommended="recommended"></virtual-modal>
+            <virtual-modal
+              ref="virtualModal"
+              :recommended="recommended"
+            ></virtual-modal>
           </div>
         </div>
       </dv-border-box-1>
@@ -51,24 +62,26 @@ Vue.use(dataV);
 export default {
   data() {
     return {
+      customId: null,
       defaultOptions: { animationData: animationData },
       num: 0,
       recommended: {}, //推荐产品
-      loading:true
+      loading: true,
+      qrCodeUrl: null
     };
   },
   components: {
     Lottie,
     // humanData,
     virtualModal,
-    labelCustom,
+    labelCustom
   },
   created() {
-    // this.getTagList();
+    this.customId = this.$route.params.id;
   },
   mounted() {
     setTimeout(() => {
-      this.loading=false
+      this.loading = false;
     }, 2000);
     this.getCustomInfo();
   },
@@ -87,8 +100,8 @@ export default {
     async addCustomTag(id) {
       try {
         const res = await addCustomTag({
-          custNo: "1001",
-          tagId: id,
+          custNo: this.customId,
+          tagId: id
         });
         // 更改标签之后重新获取用户信息（推荐产品信息）
         if (res.code == 200) {
@@ -101,14 +114,15 @@ export default {
     //获取用户用户信息（推荐产品信息）
     async getCustomInfo() {
       try {
-        const res = await getCustomInfo({ custno: 1001, token: "" });
+        const res = await getCustomInfo({ custno: this.customId, token: "" });
         if (res.code == 200) {
           const { card, financial, loan } = res.data;
           this.recommended = {
             card,
             financial,
-            loan,
+            loan
           };
+          this.qrCodeUrl=res.data.qrCodeUrl
         }
       } catch (error) {
         console.log(error);
@@ -120,18 +134,18 @@ export default {
     returnindex() {
       console.log(111);
       this.$router.push({
-        path: `/`,
+        path: `/`
       });
     },
     qrcode() {
       this.num = !this.num;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="less" scoped>
-#v{
+#v {
   width: 100%;
   height: 100%;
 }
@@ -142,8 +156,8 @@ export default {
   background-size: cover;
   animation: bganimation 15s infinite;
   position: relative;
-  .loading{
-    color:#FFF
+  .loading {
+    color: #fff;
   }
 }
 .virtual-box {
@@ -193,8 +207,6 @@ export default {
           left: 0px;
           width: 200px;
           height: 200px;
-          background: url("../assets/images/QRcode.png") no-repeat;
-          background-size: cover;
         }
       }
     }

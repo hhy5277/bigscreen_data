@@ -29,11 +29,7 @@ import { getCustomInfo, addCustomTag, getTagsList } from "../api/api";
 import "../assets/css/spin.css";
 export default {
   props: {
-    // data: {
-    //   type: Array,
-    //   default: () => {},
-    //   selectedTag: null,
-    // },
+    customId: { type: String, default: () => {} },
   },
   data() {
     return {
@@ -74,7 +70,7 @@ export default {
     //获取用户用户已经拥有的标签,并隐藏标签title
     async getCustomTags() {
       try {
-        const res = await getCustomInfo({ custno: 1001, token: "" });
+        const res = await getCustomInfo({ custno: this.customId, token: "" });
         if (res.code == 200) {
           let tags = res.data.tags;
           this.customTags = tags.map((item) => {
@@ -96,17 +92,6 @@ export default {
         console.log(error);
       }
     },
-    // // 新增用户标签
-    // async addCustomTag(id) {
-    //   try {
-    //     const res = await addCustomTag({
-    //       custNo: "1001",
-    //       tagId: id,
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
     // 防抖
     debounce(fn, wait) {
       var timeout = null;
