@@ -4,7 +4,7 @@
       <dv-border-box-1 class="back">
         <!-- <video id="v" autoplay="autoplay" loop>
           <source src="../assets/images/789.mp4" type="video/mp4" />
-        </video> -->
+        </video>-->
         <dv-loading class="loading" v-if="loading">加载中...</dv-loading>
         <div class="virtual-box">
           <div class="virtual-left">
@@ -15,7 +15,7 @@
                 <div v-show="num==1" class="qrcode"></div>
               </div>
             </div>
-            <labelCustom ref="labelCustom" @addCustomTag="addCustomTag"></labelCustom>
+            <labelCustom ref="labelCustom" :customId="customId" @addCustomTag="addCustomTag"></labelCustom>
             <div class="center">
               <Lottie :options="defaultOptions" class="antbox" />
               <div class="human">
@@ -51,10 +51,11 @@ Vue.use(dataV);
 export default {
   data() {
     return {
+      customId: null,
       defaultOptions: { animationData: animationData },
       num: 0,
       recommended: {}, //推荐产品
-      loading:true
+      loading: true,
     };
   },
   components: {
@@ -64,11 +65,11 @@ export default {
     labelCustom,
   },
   created() {
-    // this.getTagList();
+    this.customId = this.$route.params.id;
   },
   mounted() {
     setTimeout(() => {
-      this.loading=false
+      this.loading = false;
     }, 3000);
     this.getCustomInfo();
   },
@@ -87,7 +88,7 @@ export default {
     async addCustomTag(id) {
       try {
         const res = await addCustomTag({
-          custNo: "1001",
+          custNo: this.customId,
           tagId: id,
         });
         // 更改标签之后重新获取用户信息（推荐产品信息）
@@ -101,7 +102,7 @@ export default {
     //获取用户用户信息（推荐产品信息）
     async getCustomInfo() {
       try {
-        const res = await getCustomInfo({ custno: 1001, token: "" });
+        const res = await getCustomInfo({ custno: this.customId, token: "" });
         if (res.code == 200) {
           const { card, financial, loan } = res.data;
           this.recommended = {
@@ -131,7 +132,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-#v{
+#v {
   width: 100%;
   height: 100%;
 }
@@ -142,8 +143,8 @@ export default {
   background-size: cover;
   animation: bganimation 15s infinite;
   position: relative;
-  .loading{
-    color:#FFF
+  .loading {
+    color: #fff;
   }
 }
 .virtual-box {

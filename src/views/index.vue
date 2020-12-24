@@ -4,35 +4,23 @@
       <dv-border-box-1 class="back">
         <button>Click</button>
         <!-- <dv-loading>Loading...</dv-loading> -->
-        <Lottie
-          :options="defaultOptions"
-          @animCreated="handleAnimation"
-          class="antbox"
-        />
+        <Lottie :options="defaultOptions" @animCreated="handleAnimation" class="antbox" />
         <!-- <dv-decoration-5 style="width:300px;height:40px;" /> -->
         <div id="lottie" class="container">
           <div
             class="ghost-box"
-            v-for="(item, index) in information.slice(0, 3)"
-            :key="index"
+            v-for="item in information.slice(0, 3)"
+            :key="item.pid"
             @click="getDescribe(item.pid)"
           >
             <BigHead v-bind:information="item" />
           </div>
-          <div
-            class="ghost-box"
-            v-for="(item, index) in information.slice(3, 9)"
-            :key="index"
-          >
-            <SmallHead v-bind:information="item" />
+          <div class="ghost-box" v-for="item in information.slice(3, 9)" :key="item.pid">
+            <MiddleHead v-bind:information="item" />
           </div>
 
-          <div
-            class="ghost-box"
-            v-for="(item, index) in information.slice(9, 14)"
-            :key="index"
-          >
-            <MiddleHead v-bind:information="item" />
+          <div class="ghost-box" v-for="item in information.slice(9, 14)" :key="item.pid">
+            <SmallHead v-bind:information="item" />
           </div>
         </div>
       </dv-border-box-1>
@@ -58,25 +46,24 @@ export default {
       defaultOptions: { animationData: animationData },
       animationSpeed: 1,
       anim: {},
-      information: []
+      information: [],
     };
   },
   components: {
     Lottie,
     BigHead,
     MiddleHead,
-    SmallHead
+    SmallHead,
   },
   computed: {
-    ...mapState(["constomData"])
+    ...mapState(["constomData", "constomNum"]),
   },
   mounted() {
     this.init();
-    console.log();
     this.information = this.constomData;
   },
   methods: {
-    ...mapMutations(["handleConstomData"]),
+    ...mapMutations(["handleConstomData", "handleConstomNum"]),
     handleAnimation(anim) {
       this.anim = anim;
       console.log(anim);
@@ -85,9 +72,9 @@ export default {
       //   直接调用$router.push 实现携带参数的跳转
       this.$router.push({
         name: "details",
-        params:{
-         id
-        }
+        params: {
+          id,
+        },
       });
     },
     init() {
@@ -104,34 +91,36 @@ export default {
         );
         //socket = new WebSocket("${basePath}websocket/${cid}".replace("http","ws"));
         //打开事件
-        websocket.onopen = function() {
+        websocket.onopen = function () {
           console.log("Socket 已打开");
           //socket.send("这是来自客户端的消息" + location.href + new Date());
         };
         //获得消息事件
-        websocket.onmessage = function(msg) {
+        websocket.onmessage = function (msg) {
           if (msg.data !== "连接成功") {
             var data = JSON.parse(msg.data);
+            let index = that.constomNum % 14;
             let arr = that.information;
-            arr.push(data);
-            console.log(arr);
-            // that.information = arr;
+            // 不能直接arr[index]赋值，因为push等方法在uve中是变异函数，数据变化，页面变化
+            arr.splice(index, 1, data);
             that.handleConstomData(arr);
+            that.information = that.constomData;
+            that.handleConstomNum();
           }
           //发现消息进入    开始处理前端触发逻辑
         };
         //关闭事件
-        websocket.onclose = function() {
+        websocket.onclose = function () {
           console.log("Socket已关闭");
         };
         //发生了错误事件
-        websocket.onerror = function() {
+        websocket.onerror = function () {
           alert("Socket发生了错误");
           //此时可以尝试刷新页面
         };
       }
-    }
-  }
+    },
+  },
   //  var animation = bodymovin.loadAnimation({
   //   container: document.getElementById("bm"),
   //   renderer: "svg",
