@@ -7,7 +7,7 @@
         <!-- <dv-decoration-5 style="width:300px;height:40px;" /> -->
         <div id="lottie" class="container">
           <div
-            class="ghost-box"
+            class="ghost-box button"
             v-for="item in information.slice(0, 3)"
             :key="item.pid"
             @click="getDescribe(item.pid)"
