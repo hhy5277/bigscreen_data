@@ -69,7 +69,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.loading=false
-    }, 3000);
+    }, 2000);
     this.getCustomInfo();
   },
   methods: {

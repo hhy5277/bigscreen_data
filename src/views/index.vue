@@ -2,7 +2,6 @@
   <div>
     <dv-full-screen-container>
       <dv-border-box-1 class="back">
-        <button>Click</button>
         <!-- <dv-loading>Loading...</dv-loading> -->
         <Lottie
           :options="defaultOptions"
@@ -12,25 +11,27 @@
         <!-- <dv-decoration-5 style="width:300px;height:40px;" /> -->
         <div id="lottie" class="container">
           <div
-            class="ghost-box"
+            class="ghost-box button"
             v-for="(item, index) in information.slice(0, 3)"
             :key="index"
             @click="getDescribe(item.pid)"
           >
-            <BigHead v-bind:information="item" />
+            <BigHead v-bind:information="item"  />
           </div>
           <div
-            class="ghost-box"
+            class="ghost-box button"
             v-for="(item, index) in information.slice(3, 9)"
             :key="index"
+            @click="getDescribe(item.pid)"
           >
             <SmallHead v-bind:information="item" />
           </div>
 
           <div
-            class="ghost-box"
+            class="ghost-box button"
             v-for="(item, index) in information.slice(9, 14)"
             :key="index"
+            @click="getDescribe(item.pid)"
           >
             <MiddleHead v-bind:information="item" />
           </div>
@@ -83,12 +84,14 @@ export default {
     },
     getDescribe(id) {
       //   直接调用$router.push 实现携带参数的跳转
-      this.$router.push({
-        name: "details",
-        params:{
-         id
-        }
-      });
+      setTimeout(() => {
+        this.$router.push({
+          name: "details",
+          params: {
+            id
+          }
+        });
+      }, 500);
     },
     init() {
       let that = this;
@@ -379,61 +382,61 @@ export default {
   left: 0;
 }
 
-button {
+.button {
+  z-index: 222;
   display: inline-block;
   padding: 1em 2em;
-  background-color: #ff0081;
   color: #fff;
   border-radius: 4px;
   border: none;
   cursor: pointer;
   position: relative;
-  box-shadow: 0 2px 25px rgba(233, 30, 99, 0.5);
   outline: 0;
   transition: transform ease-in 0.1s, background-color ease-in 0.1s,
     box-shadow ease-in 0.25s;
 }
-button::before {
-  position: absolute;
-  content: "";
-  left: -2em;
-  right: -2em;
-  top: -2em;
-  bottom: -2em;
-  pointer-events: none;
-  transition: ease-in-out 0.5s;
-  background-repeat: no-repeat;
-  background-image: radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%);
-  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
-    10% 10%, 18% 18%, 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%,
-    20% 20%;
-  background-position: 18% 40%, 20% 31%, 30% 30%, 40% 30%, 50% 30%, 57% 30%,
-    65% 30%, 80% 32%, 15% 60%, 83% 60%, 18% 70%, 25% 70%, 41% 70%, 50% 70%,
-    64% 70%, 80% 71%;
-  animation: bubbles ease-in-out 0.75s forwards;
-}
+// .button::before {
+//   position: absolute;
+//   content: "";
+//   left: -3em;
+//   right: -3em;
+//   top: -3em;
+//   bottom: -3em;
+//   pointer-events: none;
+//   transition: ease-in-out 0.5s;
+//   background-repeat: no-repeat;
+//   background-image: radial-gradient(circle, #5499c7 20%, transparent 20%),
+//     radial-gradient(circle, #a93226 20%, transparent 20%),
+//     radial-gradient(circle, #229954 20%, transparent 20%),
+//     radial-gradient(circle, #f1c40f 20%, transparent 20%),
+//     radial-gradient(circle, #5b2c6f 20%, transparent 20%),
+//     radial-gradient(circle, #ff0081 20%, transparent 20%),
+//     radial-gradient(circle, #303f9f 20%, transparent 20%),
+//     radial-gradient(circle, #00796b 20%, transparent 20%),
+//     radial-gradient(circle, #37adbd 20%, transparent 20%),
+//     radial-gradient(circle, #5a9cd1 20%, transparent 20%),
+//     radial-gradient(circle, #ff0081 20%, transparent 20%),
+//     radial-gradient(circle, #d8432f 20%, transparent 20%),
+//     radial-gradient(circle, #01f3fb 20%, transparent 20%),
+//     radial-gradient(circle, #c1f13b 20%, transparent 20%),
+//     radial-gradient(circle, #ff0081 20%, transparent 20%),
+//     radial-gradient(circle, #c79610 20%, transparent 20%),
+//     radial-gradient(circle, #fffdf7 20%, transparent 20%);
+//   background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+//     10% 10%, 18% 18%, 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%,
+//     20% 20%, 40% 40%;
+//   background-position: 18% 40%, 20% 31%, 30% 30%, 40% 30%, 50% 30%, 57% 30%,
+//     65% 30%, 80% 32%, 15% 60%, 83% 60%, 18% 70%, 25% 70%, 41% 70%, 50% 70%,
+//     64% 70%, 80% 71%, 30% 30%;
+//   animation: bubbles ease-in-out 0.75s forwards;
+// }
 
-button:active {
-  transform: scale(0.95);
-  background-color: #f3037c;
-  box-shadow: 0 2px 25px rgba(233, 30, 99, 0.5);
+.button:active {
+  transform: scale(0.85);
+  // background-color: red;
+  // box-shadow: 0 2px 25px rgba(233, 30, 99, 0.5);
 }
-button:active::before {
+.button:active::before {
   animation: none;
   background-size: 0;
 }

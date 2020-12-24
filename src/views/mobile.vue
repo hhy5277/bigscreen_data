@@ -1,7 +1,7 @@
 <template>
   <div class="background">
     <div class="layout">
-      <div class="keywords">我的关键词“{{evaluate}}”</div>
+      <div class="keywords">我的关键词“{{ evaluate }}”</div>
       <!-- <div class="bubble-box">
         <div class="bubble" v-for="item in rounds" :key="item.id">50万以上</div>
       </div>-->
@@ -277,27 +277,34 @@ export default {
           ]
         }
       ],
-      evaluate:'',
+      evaluate: "",
       card: [],
       financial: [],
       loan: [],
-      tags:[]
+      tags: [],
+      userID: null
     };
   },
   mounted() {
+    // console.log(this.$router.params.id, 111111);
+    // this.userID = this.$router.params.id;
+    var userid=window.location.search.split("?id=")[1]
+this.userID=userid
     screencustInfo({
-      custno: "1001"
+      custno: this.userID
     }).then(res => {
       if (res.code == 200) {
-        this.evaluate = res.data.evaluate
+        this.evaluate = res.data.evaluate;
         this.card = res.data.card;
         this.financial = res.data.financial;
         this.loan = res.data.loan;
-       var result = res.data.tags;
-         this.tags= result.map(a => a.name);
-         this.drawChart();
+        var result = res.data.tags;
+        this.tags = result.map(a => a.name);
+        this.drawChart();
       }
     });
+
+   
   },
   methods: {
     drawChart() {
@@ -305,7 +312,7 @@ export default {
       // 基于准备好的dom，初始化echarts实例
       var myChart = echarts.init(document.getElementById("main"));
       let sizes = [50, 60, 70];
-      var names =this.tags;
+      var names = this.tags;
       let data = this.tags.map(item => {
         return {
           name: item,
@@ -344,7 +351,9 @@ export default {
           }
         ]
       });
-    }
+    },
+
+  
   }
 };
 </script>
