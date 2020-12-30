@@ -1,5 +1,13 @@
 <template>
   <div id="details">
+    <!-- v-show="show" -->
+    <div class="mydialog" v-show="show" @click="closeMyDia">
+      <div class="innerDialog">
+        <div>退 出 ( {{count}}s )</div>
+        <div>点击屏幕继续</div>
+      </div>
+    </div>
+
     <dv-full-screen-container>
       <dv-border-box-1 class="back">
         <!-- <video id="v" autoplay="autoplay" loop>
@@ -9,10 +17,7 @@
         <div class="virtual-box">
           <div class="virtual-left">
             <div class="return-box">
-              <div class="return" @click="returnindex">
-                返回首页
-                <span v-show="show">{{ count }} s</span>
-              </div>
+              <div class="return" @click="returnindex">返回首页</div>
 
               <div class="return" @click="qrcode">
                 预览报告
@@ -67,6 +72,8 @@ export default {
       loading: true,
       qrCodeUrl: null,
       currentTime: new Date().getTime(),
+      lastTime: new Date().getTime(),
+      diff: 1000 * 60,
       timeout: null, //定时器,
       show: false,
       count: "",
@@ -89,42 +96,55 @@ export default {
     this.getCustomInfo();
     this.OperatingWebsite();
   },
+  // beforeDestroy() {
+  //   if (this.timer) {
+  //     console.log(222);
+  //     clearInterval(this.timer);
+  //   }
+  // },
   methods: {
     OperatingWebsite() {
       let that = this;
-      let currentTime = new Date().getTime();
-      let lastTime = new Date().getTime();
-      let diff = 1000 * 60;
-      let timer;
       let details = document.getElementById("dv-full-screen-container");
       details.addEventListener("click", function () {
-        lastTime = new Date().getTime();
+        that.lastTime = new Date().getTime();
         that.show = false;
         that.count = 15;
-        clearInterval(timer);
-        name();
+        clearInterval(that.timer);
+        that.openInterval();
       });
-      function name(params) {
-        let count = 60;
-        timer = setInterval(function () {
-          currentTime = new Date().getTime();
-          if (currentTime - lastTime <= diff) {
-            count--;
-            if (count <= 15) {
-              that.show = true;
-              that.count = count;
-            }
-            console.log(count);
-          } else {
-            // console.log("跳转");
-            that.$router.push("/");
-            that.show = false;
-            that.count = 5;
-            clearInterval(timer);
+      this.openInterval();
+    },
+    openInterval() {
+      let that = this;
+      let count = 60;
+      this.timer = setInterval(function () {
+        that.currentTime = new Date().getTime();
+        if (that.$route.name !== "details") return false;
+        if (that.currentTime - that.lastTime <= that.diff) {
+          count--;
+          if (count <= 15) {
+            that.show = true;
+            that.count = count;
           }
-        }, 1000);
-      }
-      name();
+          // console.log(that.timer, "-------");
+          // console.log(count);
+        } else {
+          that.$router.push("/");
+          that.show = false;
+          that.count = 15;
+          clearInterval(that.timer);
+        }
+      }, 1000);
+    },
+    // 关闭模态框
+    closeMyDia() {
+      this.show = false;
+      this.lastTime = new Date().getTime();
+      this.show = false;
+      this.count = 15;
+      clearInterval(this.timer);
+      this.openInterval();
     },
 
     // 新增用户标签
@@ -162,8 +182,12 @@ export default {
     handleAnimation(anim) {
       this.anim = anim;
     },
-    returnindex() {
-      console.log(111);
+    returnindex(e) {
+      e.stopPropagation();
+      this.lastTime = new Date().getTime();
+      this.show = false;
+      this.count = 15;
+      clearInterval(this.timer);
       this.$router.push({
         path: `/`,
       });
@@ -179,6 +203,52 @@ export default {
 #v {
   width: 100%;
   height: 100%;
+}
+.mydialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  .innerDialog {
+    width: 250px;
+    // height: 100px;
+    background: rgba(31, 165, 255, 0.1);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 10px 20px;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background: url("../assets/images/returnIndex.png") no-repeat 0
+      0;
+    background-size: 100% 100%;
+    // display: flex;
+    // flex-direction: column;
+    & > div {
+      text-align: center;
+      line-height: 30px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    & > div:nth-child(2) {
+      font-size: 12px;
+    }
+    // .topHeight {
+    //   height: 30px;
+    //   line-height: 30px;
+    //   text-align: right;
+    //   padding: 0 10px;
+    //   border-bottom: 1px solid #eee;
+    // }
+    // .container {
+    //   flex: 1;
+    //   line-height: 60px;
+    // }
+  }
 }
 .back {
   margin: 0;

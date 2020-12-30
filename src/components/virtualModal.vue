@@ -123,10 +123,6 @@
             <span class="label">发行机构:</span>
             <span class="content">{{conductForm.issuer}}</span>
           </div>
-          <div class="formItem">
-            <span class="label">产品说明书:</span>
-            <span class="content">{{conductForm.financialContent}}</span>
-          </div>
         </div>
         <div class="back" @click="currentCard = null">
           <img src="../assets/images/leftJT.png" alt />
@@ -149,8 +145,10 @@
       <div v-show="currentCard !== 3">
         <!-- <div class="contant">贷款金额:最高300万</div>
         <div class="contant">贷款年限:{{loanData.loanTerm}}</div>
-        <div class="contant">贷款利息:5%</div> -->
-        <div class="contant">{{loanData.loanName}}</div>
+        <div class="contant">贷款利息:5%</div>-->
+        <div class="contant">贷款名称:{{loanData.loanName}}</div>
+        <div class="contant">贷款金额:{{loanData.loanLimit}}</div>
+        <div class="contant">贷款年限:{{loanData.loanTerm}}</div>
       </div>
       <div v-show="currentCard == 3" class="hiddenContant">
         <div class="loanContainer">
@@ -346,12 +344,13 @@ export default {
   .creditCard {
     color: #fff;
     .cardContainer {
-      margin: 20px 0 20px;
-      display: flex;
+      // margin: 20px 0 20px;
+        margin: 10px auto;
       .item {
+        margin: 10px auto;
         flex: 1;
-        width: 33.3%;
-        margin: 0 1px;
+        width: 40%;
+        // margin: 0 1px;
 
         img {
           width: 100%;
