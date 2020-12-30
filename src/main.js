@@ -1,23 +1,21 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
-import router from './router'
+import Vue from "vue";
+import App from "./App";
+import router from "./router";
 // 引入css
 import "./assets/css/reset.css";
-
-import searchStore from './store/SearchStore' 
-
-Vue.config.productionTip = false
-
+import searchStore from "./store/SearchStore";
+Vue.config.productionTip = false;
+// Vue.prototype.$alert = MessageBox.alert;
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
+  el: "#app",
   router,
-  store:searchStore, 
+  store: searchStore,
   components: { App },
-  template: '<App/>'
-})
+  template: "<App/>"
+});
 // export default [
 //   require('./assets/lottie/humanbody.json')
 // ]

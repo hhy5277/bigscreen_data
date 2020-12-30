@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="details">
     <dv-full-screen-container>
       <dv-border-box-1 class="back">
         <!-- <video id="v" autoplay="autoplay" loop>
@@ -9,21 +9,24 @@
         <div class="virtual-box">
           <div class="virtual-left">
             <div class="return-box">
-              <div class="return" @click="returnindex">返回首页</div>
+              <div class="return" @click="returnindex">
+                返回首页
+                <span v-show="show">{{ count }} s</span>
+              </div>
+
               <div class="return" @click="qrcode">
                 预览报告
                 <div
-                v-show="this.num==1"
+                  v-show="this.num == 1"
                   class="qrcode"
-                  v-bind:style="{ 'background-image':'url('+qrCodeUrl+')', backgroundSize: 'cover' }"
+                  v-bind:style="{
+                    'background-image': 'url(' + qrCodeUrl + ')',
+                    backgroundSize: 'cover'
+                  }"
                 ></div>
               </div>
             </div>
-            <labelCustom
-              ref="labelCustom"
-              :customId="customId"
-              @addCustomTag="addCustomTag"
-            ></labelCustom>
+            <labelCustom ref="labelCustom" :customId="customId" @addCustomTag="addCustomTag"></labelCustom>
             <div class="center">
               <Lottie :options="defaultOptions" class="antbox" />
               <div class="human">
@@ -35,10 +38,7 @@
             </div>
           </div>
           <div class="virtual-right">
-            <virtual-modal
-              ref="virtualModal"
-              :recommended="recommended"
-            ></virtual-modal>
+            <virtual-modal ref="virtualModal" :recommended="recommended"></virtual-modal>
           </div>
         </div>
       </dv-border-box-1>
@@ -47,18 +47,16 @@
 </template>
 
 <script>
+import Vue from "vue";
 import { getCustomInfo, addCustomTag } from "../api/api";
-
 import labelCustom from "../components/label-custom";
 import virtualModal from "../components/virtualModal";
 // import "../assets/css/spin.css";
 import animationData from "../assets/lottie/antcircle.json";
 // import humanData from "../components/animationData";
 import Lottie from "vue-lottie/src/lottie.vue";
-import Vue from "vue";
 import dataV from "@jiaminghi/data-view";
 Vue.use(dataV);
-
 export default {
   data() {
     return {
@@ -67,14 +65,19 @@ export default {
       num: 0,
       recommended: {}, //推荐产品
       loading: true,
-      qrCodeUrl: null
+      qrCodeUrl: null,
+      currentTime: new Date().getTime(),
+      timeout: null, //定时器,
+      show: false,
+      count: "",
+      timer: null,
     };
   },
   components: {
     Lottie,
     // humanData,
     virtualModal,
-    labelCustom
+    labelCustom,
   },
   created() {
     this.customId = this.$route.params.id;
@@ -84,24 +87,52 @@ export default {
       this.loading = false;
     }, 2000);
     this.getCustomInfo();
+    this.OperatingWebsite();
   },
   methods: {
-    // // 获取所有标签列表
-    // async getTagList() {
-    //   const res = await getTagsList();
-    //   if (res.code == 200) {
-    //     res.data.map((item, index) => {
-    //       item.labelStyle = this.labelStyle[index];
-    //     });
-    //     this.tagsList = res.data;
-    //   }
-    // },
+    OperatingWebsite() {
+      let that = this;
+      let currentTime = new Date().getTime();
+      let lastTime = new Date().getTime();
+      let diff = 1000 * 60;
+      let timer;
+      let details = document.getElementById("dv-full-screen-container");
+      details.addEventListener("click", function () {
+        lastTime = new Date().getTime();
+        that.show = false;
+        that.count = 15;
+        clearInterval(timer);
+        name();
+      });
+      function name(params) {
+        let count = 60;
+        timer = setInterval(function () {
+          currentTime = new Date().getTime();
+          if (currentTime - lastTime <= diff) {
+            count--;
+            if (count <= 15) {
+              that.show = true;
+              that.count = count;
+            }
+            console.log(count);
+          } else {
+            // console.log("跳转");
+            that.$router.push("/");
+            that.show = false;
+            that.count = 5;
+            clearInterval(timer);
+          }
+        }, 1000);
+      }
+      name();
+    },
+
     // 新增用户标签
     async addCustomTag(id) {
       try {
         const res = await addCustomTag({
           custNo: this.customId,
-          tagId: id
+          tagId: id,
         });
         // 更改标签之后重新获取用户信息（推荐产品信息）
         if (res.code == 200) {
@@ -120,9 +151,9 @@ export default {
           this.recommended = {
             card,
             financial,
-            loan
+            loan,
           };
-          this.qrCodeUrl=res.data.qrCodeUrl
+          this.qrCodeUrl = res.data.qrCodeUrl;
         }
       } catch (error) {
         console.log(error);
@@ -134,13 +165,13 @@ export default {
     returnindex() {
       console.log(111);
       this.$router.push({
-        path: `/`
+        path: `/`,
       });
     },
     qrcode() {
       this.num = !this.num;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -177,7 +208,7 @@ export default {
       .human {
         width: 70%;
         height: 80%;
-        // background: url("../assets/images/human.gif") no-repeat;
+        background: url("../assets/images/human.gif") no-repeat;
         background-size: cover;
         position: absolute;
         top: 10%;
@@ -214,5 +245,9 @@ export default {
   .virtual-right {
     width: 35%;
   }
+}
+.count {
+  font-size: 60px;
+  color: #fff;
 }
 </style>

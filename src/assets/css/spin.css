@@ -77,7 +77,8 @@ table {
   color: #4D91D3;
   transition: all 1s ease;
   box-shadow: 0 0 15px #1FA5FF;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .radmenu .selected {
