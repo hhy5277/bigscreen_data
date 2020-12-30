@@ -81,6 +81,7 @@ export default {
         transform: translate3d(-50%, -10px, 0);
         color: #fff;
         font-weight: 700;
+        line-height: 20px;
       }
     }
   }
