@@ -95,10 +95,12 @@ export default {
         console.log("您的浏览器不支持WebSocket");
       } else {
         console.log("您的浏览器支持WebSocket");
+        console.log()
+        var num = Math.ceil(Math.random()*10)
         //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
         //等同于
         var websocket = new WebSocket(
-          "ws://192.168.0.85:8282/kangxu-hkface/websocket/1"
+          "ws://192.168.0.85:8282/kangxu-hkface/websocket/"+num
         );
         //socket = new WebSocket("${basePath}websocket/${cid}".replace("http","ws"));
         //打开事件
