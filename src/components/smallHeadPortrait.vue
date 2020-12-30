@@ -82,6 +82,7 @@ export default {
         font-size: 5px;
         color: #fff;
         font-weight: 700;
+        line-height: 12px;
       }
     }
   }

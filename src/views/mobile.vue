@@ -15,13 +15,14 @@
           <div class="cardBox">
             <div class="imgbox">
               <img :src="card.cardImage" alt />
+              <div>{{card.cardName}}</div>
             </div>
             <!-- <div class="imgbox">
               <img src="../assets/images/secondone.png" alt />
             </div> -->
           </div>
           <p>
-            {{ card.cardName }}
+            {{ card.content }}
           </p>
           <div class="virtualForm">
             <div class="formItem">
@@ -297,7 +298,7 @@ this.userID=userid
         this.evaluate = res.data.evaluate;
         this.card = res.data.card;
         this.financial = res.data.financial;
-        this.loan = res.data.loan;
+        this.loan = res.data.loan.detail;
         var result = res.data.tags;
         this.tags = result.map(a => a.name);
         this.drawChart();

@@ -100,6 +100,7 @@ export default {
         font-size: 10px;
         color: #fff;
         font-weight: 700;
+        line-height: 16px;
       }
     }
   }

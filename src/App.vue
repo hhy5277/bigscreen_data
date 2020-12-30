@@ -6,25 +6,25 @@
 
 <script>
 export default {
-  name: "App",
+  name: "App"
 };
 </script>
 
-<style>
+<style lang="less" scoped>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @import "./assets/font/font.css";
+  font-family: "zhanku";
+  font-size: 18px;
   height: 100%;
 }
 </style>
 <script>
 export default {
-  mounted(){
-var dom = document.getElementById ('app');
-dom.oncontextmenu = function (){
-     return false;
-}
+  mounted() {
+    var dom = document.getElementById("app");
+    dom.oncontextmenu = function() {
+      return false;
+    };
   }
-}
+};
 </script>

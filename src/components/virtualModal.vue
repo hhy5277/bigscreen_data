@@ -238,7 +238,7 @@ export default {
       font-weight: 700;
       line-height: 30px;
       letter-spacing: 2px;
-      font-size: 16px;
+      font-size: 22px;
       background: #080621;
       margin: 6% 0;
     }
@@ -272,7 +272,7 @@ export default {
     .back,
     .loanItem {
       font-weight: 700;
-      font-size: 14px;
+      font-size: 18px;
       text-align: left;
       line-height: 30px;
       letter-spacing: 2px;
@@ -354,8 +354,7 @@ export default {
 
         img {
           width: 100%;
-          max-width: 280px;
-          margin-bottom: 2px;
+          max-width: 270px;
         }
         span {
           display: inline-block;
